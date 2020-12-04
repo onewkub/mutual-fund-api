@@ -4,6 +4,11 @@ This api will response the top five of matual fund that suit up with your reques
 ## Description
 The Project will develop with [Apache Jena](https://jena.apache.org/) and [SPAQL](https://www.w3.org/TR/rdf-sparql-query/).
 
+## Matual Fund Data
+Matual Fund data on Thailand. [SEC API](https://api-portal.sec.or.th/)
+
+
+
 ## Objective
 - Study about ontology database.
 - Find the matual fund symbol, name that suit up with your personality and risk.
