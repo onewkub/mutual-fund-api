@@ -18,6 +18,7 @@ Matual Fund data on Thailand. [SEC API](https://api-portal.sec.or.th/)
 - [SPAQL](https://www.w3.org/TR/rdf-sparql-query/)
 - [Protégé](https://protege.stanford.edu/)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) __(Not confirm)__
-- [Node.js](https://nodejs.org/en/) __(LTS Version)__
+- [Node.js](https://nodejs.org/en/) __(LTS Version) [Front-end]__
+- [.NET Core](https://dotnet.microsoft.com/download) __(Version 5.x) [Back-end]__
 
 PS. ....
