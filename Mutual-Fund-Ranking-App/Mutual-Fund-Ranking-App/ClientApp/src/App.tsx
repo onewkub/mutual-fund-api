@@ -1,25 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import Router from 'router'
+import { Layout } from 'antd'
+import MenuBar from 'components/menu-bar'
+import SideNavigation from 'components/side-navigation'
+import 'antd/dist/antd.css';
+
+const { Header, Footer, Content, Sider } = Layout
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+
+      <Header>
+        <MenuBar />
+      </Header>
+
+      <Layout>
+        <Sider>
+          <SideNavigation />
+        </Sider>
+        <Content>
+          <Router></Router>
+        </Content>
+      </Layout>
+
+      <Footer>
+        <div>
+          Copyright By Wachira Norasing
+        </div>
+      </Footer>
+
+
+    </Layout>
   );
 }
 
