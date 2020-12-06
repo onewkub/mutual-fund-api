@@ -1,39 +1,31 @@
-import React from 'react';
-import './App.scss';
+import React from 'react'
 import Router from 'router'
 import { Layout } from 'antd'
 import MenuBar from 'components/menu-bar'
+import WebFooter from 'components/web-footer'
 import SideNavigation from 'components/side-navigation'
-import 'antd/dist/antd.css';
 
-const { Header, Footer, Content, Sider } = Layout
+import './App.less'
+
+const { Content } = Layout
 
 function App() {
   return (
-    <Layout>
-
-      <Header>
-        <MenuBar />
-      </Header>
-
+    <Layout className="app">
+      <SideNavigation />
       <Layout>
-        <Sider>
-          <SideNavigation />
-        </Sider>
-        <Content>
-          <Router></Router>
+        <MenuBar />
+
+        <Content className="app-content">
+          <Layout className="app-content-layout">
+            <Router></Router>
+          </Layout>
         </Content>
+
+        <WebFooter />
       </Layout>
-
-      <Footer>
-        <div>
-          Copyright By Wachira Norasing
-        </div>
-      </Footer>
-
-
     </Layout>
-  );
+  )
 }
 
-export default App;
+export default App
