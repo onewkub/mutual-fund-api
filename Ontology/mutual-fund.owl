@@ -163,6 +163,14 @@
                   rdfs:domain :FundType .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#HoldRange
+:HoldRange rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :FundProperty ;
+           rdfs:domain :Fund ;
+           rdfs:range xsd:float ;
+           rdfs:comment "ระยะถือครองสินทรัพย์ (หน่วย: ปี)"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Loss
 :Loss rdf:type owl:DatatypeProperty ;
       rdfs:domain :Fund ;
@@ -411,6 +419,14 @@
      :StockSymbol "AOT"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BOT_BOND
+:BOT_BOND rdf:type owl:NamedIndividual ,
+                   :Bond ;
+          :AssetName "พันธบัตรธนาคารแห่งประเทศไทย (BOT BOND)"^^xsd:string ;
+          :CreditRating "AAA"^^xsd:string ;
+          :Value "8.31"^^xsd:float .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BalanceFund
 :BalanceFund rdf:type owl:NamedIndividual ,
                       :FundType ;
@@ -439,6 +455,22 @@
             :FundTypeNameTH "กองทุนรวมตราสารทุน"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#FPT
+:FPT rdf:type owl:NamedIndividual ,
+              :Bond ;
+     :AssetName "บมจ.เฟรเซอร์ส พร็อพเพอร์ตี้(ประเทศไทย)(FPT)"^^xsd:string ;
+     :CreditRating "A-"^^xsd:string ;
+     :Value "5.54"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#GOVERNMENT_BOND
+:GOVERNMENT_BOND rdf:type owl:NamedIndividual ,
+                          :Bond ;
+                 :AssetName "พันธบัตรรัฐบาล (GOVERNMENT BOND)"^^xsd:string ;
+                 :CreditRating "AAA"^^xsd:string ;
+                 :Value "15.73"^^xsd:float .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#GeneralFixedIncomeFund
 :GeneralFixedIncomeFund rdf:type owl:NamedIndividual ,
                                  :FundType ;
@@ -446,10 +478,33 @@
                         :FundTypeNameTH "กองทุนรวมตราสารหนี้"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CBOND
+:K-CBOND rdf:type owl:NamedIndividual ,
+                  :Opened-EndFund ;
+         :Invest :BOT_BOND ,
+                 :FPT ,
+                 :GOVERNMENT_BOND ,
+                 :THANI ,
+                 :WHA ;
+         :Dividen "false"^^xsd:boolean ;
+         :FundName """กองทุนเปิดเค หุ้นกู้
+K Corporate Bond Fund"""^^xsd:string ;
+         :FundSymbol "K-CBOND"^^xsd:string ;
+         :HoldRange "1.86"^^xsd:float ;
+         :MaxLoss "-1.78"^^xsd:float ;
+         :MaxProfit "3.65"^^xsd:float ;
+         :MinProfit "1.13"^^xsd:float ;
+         :ProfitFromInit "2.83"^^xsd:float ;
+         :Risk "4"^^xsd:int ;
+         :SD "0.51"^^xsd:float ;
+         :Start "1999-11-22T00:00:00"^^xsd:dateTime .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KAsset
 :KAsset rdf:type owl:NamedIndividual ,
                  :AMC ;
-        :Manage <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)> ;
+        :Manage :K-CBOND ,
+                <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)> ;
         :AMCName "หลักทรัพย์จัดการกองทุนกสิกรไทย"^^xsd:string .
 
 
@@ -569,6 +624,22 @@
             :FundTypeNameTH "กองทุนรวมกลุ่มธุรกิจ"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#THANI
+:THANI rdf:type owl:NamedIndividual ,
+                :Bond ;
+       :AssetName "บมจ.ราชธานีลิสซิ่ง (THANI)"^^xsd:string ;
+       :CreditRating "A-"^^xsd:string ;
+       :Value "7.7"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#WHA
+:WHA rdf:type owl:NamedIndividual ,
+              :Bond ;
+     :AssetName "บมจ.ดับบลิวเอชเอ คอปอร์เรชั่น"^^xsd:string ;
+     :CreditRating "A-"^^xsd:string ;
+     :Value "5.31"^^xsd:float .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)
 <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)> rdf:type owl:NamedIndividual ,
                                                                                                 :Opened-EndFund ;
@@ -646,6 +717,15 @@
                 :Silver
                 :Stock
               )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :K-CBOND
+                        :SCBNK225
+                        :SCBSET50
+                        <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)>
+                      )
 ] .
 
 
