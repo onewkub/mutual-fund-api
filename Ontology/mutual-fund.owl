@@ -21,7 +21,11 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Invest
 :Invest rdf:type owl:ObjectProperty ;
         rdfs:domain :Fund ;
-        rdfs:range :Percentage ;
+        rdfs:range :Percentage ,
+                   [ rdf:type owl:Restriction ;
+                     owl:onProperty :Value ;
+                     owl:someValuesFrom xsd:float
+                   ] ;
         owl:propertyDisjointWith :Manage .
 
 
@@ -268,12 +272,31 @@
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Asset
-:Asset rdf:type owl:Class .
+:Asset rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :AssetName ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onDataRange xsd:string
+                       ] .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Bond
 :Bond rdf:type owl:Class ;
-      rdfs:subClassOf :Asset .
+      rdfs:subClassOf :Asset ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :BondRange ;
+                        owl:someValuesFrom xsd:string
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :BondNumber ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :CreditRating ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Closed-EndFund
@@ -284,11 +307,46 @@
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Fund
 :Fund rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                        owl:onProperty :Dividen ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:boolean
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :FundName ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :FundSymbol ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :Risk ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:int
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :SD ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:float
+                      ] ;
       owl:disjointWith :FundType .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#FundType
-:FundType rdf:type owl:Class .
+:FundType rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :FundTypeName ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :FundTypeNameTH ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Gold
@@ -307,7 +365,12 @@
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Percentage
-:Percentage rdf:type owl:Class .
+:Percentage rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :Value ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:float
+                            ] .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Silver
@@ -317,7 +380,17 @@
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Stock
 :Stock rdf:type owl:Class ;
-       rdfs:subClassOf :Asset .
+       rdfs:subClassOf :Asset ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :StockName ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onDataRange xsd:string
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :StockSymbol ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onDataRange xsd:string
+                       ] .
 
 
 #################################################################
@@ -445,13 +518,11 @@
           :Dividen "false"^^xsd:boolean ;
           :FundName "กองทุนเปิดไทยพาณิชย์ SET50 INDEX"^^xsd:string ;
           :FundSymbol "SCBSET50"^^xsd:string ;
-          :MaxLoss ""^^xsd:dateTime ,
-                   "-39.89"^^xsd:float ;
+          :MaxLoss "-39.89"^^xsd:float ;
           :MaxProfit "35.47"^^xsd:float ;
           :MinProfit "5.04"^^xsd:float ;
           :ProfitFromInit "6.35"^^xsd:float ;
-          :Risk "17.95"^^xsd:float ,
-                "6"^^xsd:int ;
+          :Risk "6"^^xsd:int ;
           :SD "18.76"^^xsd:float ;
           :Start "2011-08-19T00:00:00"^^xsd:dateTime .
 
