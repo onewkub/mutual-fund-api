@@ -34,7 +34,8 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#To
 :To rdf:type owl:ObjectProperty ;
     rdfs:domain :Percentage ;
-    rdfs:range :Asset .
+    rdfs:range :Asset ,
+               :Fund .
 
 
 #################################################################
@@ -78,11 +79,25 @@
               rdfs:domain :Bond .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BondRange
+:BondRange rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :BondProperty ;
+           rdfs:domain :Bond ;
+           rdfs:range xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#CreditRating
 :CreditRating rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf :BondProperty ;
               rdfs:domain :Bond ;
               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#Dividen
+:Dividen rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :FundProperty ;
+         rdfs:domain :Fund ;
+         rdfs:range xsd:boolean .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#End
@@ -309,6 +324,13 @@
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#AIS
+:AIS rdf:type owl:NamedIndividual ,
+              :Stock ;
+     :StockName "แอดวานซ์ อินโฟร์ เซอร์วิส"^^xsd:string ;
+     :StockSymbol "ADVANC"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#AOT
 :AOT rdf:type owl:NamedIndividual ,
               :Stock ;
@@ -323,6 +345,20 @@
              :FundTypeNameTH "กองทุนรวมผสม"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#CPALL
+:CPALL rdf:type owl:NamedIndividual ,
+                :Stock ;
+       :StockName "ซีพี ออลล์"^^xsd:string ;
+       :StockSymbol "CPALL"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#DELTA
+:DELTA rdf:type owl:NamedIndividual ,
+                :Stock ;
+       :StockName "บมจ. เดลต้า อีเลคโทรนิคส์ (ประเทศไทย)"^^xsd:string ;
+       :StockSymbol "DELTA"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#EquityFund
 :EquityFund rdf:type owl:NamedIndividual ,
                      :FundType ;
@@ -335,6 +371,12 @@
                                  :FundType ;
                         :FundTypeName "General Fixed Income  Fund"^^xsd:string ;
                         :FundTypeNameTH "กองทุนรวมตราสารหนี้"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KAsset
+:KAsset rdf:type owl:NamedIndividual ,
+                 :AMC ;
+        :AMCName "หลักทรัพย์จัดการกองทุนกสิกรไทย"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#MoneyMarketFund
@@ -354,17 +396,38 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCB
 :SCB rdf:type owl:NamedIndividual ,
               :AMC ;
-     :Manage :SCBSET50 .
+     :Manage :SCBSET50 ;
+     :AMCName "บลจ. ไทยพาณิชย์"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSET50
 :SCBSET50 rdf:type owl:NamedIndividual ,
                    :Opened-EndFund ;
           :FundType :EquityFund ;
-          :Invest :SCBSET50-AOT ,
+          :Invest :SCBSET50-AIS ,
+                  :SCBSET50-AOT ,
+                  :SCBSET50-CPALL ,
+                  :SCBSET50-DELTA ,
                   :SCBSET50-PTT ;
-          :FundName "กองทุนเปิดไทยพาณิชย์"^^xsd:string ;
-          :FundSymbol "SCBSET50"^^xsd:string .
+          :Dividen "false"^^xsd:boolean ;
+          :FundName "กองทุนเปิดไทยพาณิชย์ SET50 INDEX"^^xsd:string ;
+          :FundSymbol "SCBSET50"^^xsd:string ;
+          :MaxLoss ""^^xsd:dateTime ,
+                   "-39.89"^^xsd:float ;
+          :MaxProfit "35.47"^^xsd:float ;
+          :MinProfit "5.04"^^xsd:float ;
+          :ProfitFromInit "6.35"^^xsd:float ;
+          :Risk "17.95"^^xsd:float ,
+                "6"^^xsd:int ;
+          :SD "18.76"^^xsd:float ;
+          :Start "2011-08-19T00:00:00"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSET50-AIS
+:SCBSET50-AIS rdf:type owl:NamedIndividual ,
+                       :Percentage ;
+              :To :AIS ;
+              :Value "4.74"^^xsd:float .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSET50-AOT
@@ -372,6 +435,20 @@
                        :Percentage ;
               :To :AOT ;
               :Value "8.05"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSET50-CPALL
+:SCBSET50-CPALL rdf:type owl:NamedIndividual ,
+                         :Percentage ;
+                :To :CPALL ;
+                :Value "4.73"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSET50-DELTA
+:SCBSET50-DELTA rdf:type owl:NamedIndividual ,
+                         :Percentage ;
+                :To :DELTA ;
+                :Value "5.48"^^xsd:float .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSET50-PTT
@@ -388,9 +465,70 @@
             :FundTypeNameTH "กองทุนรวมกลุ่มธุรกิจ"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)
+<http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)> rdf:type owl:NamedIndividual ,
+                                                                                                :Opened-EndFund ;
+                                                                                       :FundType :EquityFund ;
+                                                                                       :Dividen "false"^^xsd:boolean ;
+                                                                                       :FundName "กองทุนเปิดเค เซ็ท 50 หุ้นระยะยาว-A ชนิดสะสมมูลค่า"^^xsd:string ;
+                                                                                       :FundSymbol "KS50LTF-A(A)"^^xsd:string ;
+                                                                                       :MaxLoss "17.22"^^xsd:float ;
+                                                                                       :MaxProfit "2.83"^^xsd:float ;
+                                                                                       :MinProfit "2.83"^^xsd:float ;
+                                                                                       :ProfitFromInit "2.83"^^xsd:float ;
+                                                                                       :Risk "6"^^xsd:int ;
+                                                                                       :SD "22.76"^^xsd:float ;
+                                                                                       :Start "2019-11-23T00:00:00"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-AIS
+<http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-AIS> rdf:type owl:NamedIndividual ,
+                                                                                                    :Percentage ;
+                                                                                           :To :AIS ;
+                                                                                           :Value "4.6"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-AOT
+<http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-AOT> rdf:type owl:NamedIndividual ,
+                                                                                                    :Percentage ;
+                                                                                           :To :AOT ;
+                                                                                           :Value "7.66"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-CPALL
+<http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-CPALL> rdf:type owl:NamedIndividual ,
+                                                                                                      :Percentage ;
+                                                                                             :To :CPALL ;
+                                                                                             :Value "4.63"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-DELTA
+<http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-DELTA> rdf:type owl:NamedIndividual ,
+                                                                                                      :Percentage ;
+                                                                                             :To :DELTA ;
+                                                                                             :Value "5.92"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-PTT
+<http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-PTT> rdf:type owl:NamedIndividual ,
+                                                                                                    :Percentage ;
+                                                                                           :To :PTT ;
+                                                                                           :Value "9.71"^^xsd:float .
+
+
 #################################################################
 #    General axioms
 #################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AMC
+                :Asset
+                :Fund
+                :FundType
+                :Percentage
+              )
+] .
+
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :Bond
@@ -403,8 +541,42 @@
 
 
 [ rdf:type owl:AllDifferent ;
-  owl:distinctMembers ( :SCB
-                        :SCBSET50
+  owl:distinctMembers ( :SCBSET50
+                        <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :SCBSET50-AIS
+                        :SCBSET50-AOT
+                        :SCBSET50-CPALL
+                        :SCBSET50-DELTA
+                        :SCBSET50-PTT
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :SCBSET50-AIS
+                        :SCBSET50-AOT
+                        :SCBSET50-DELTA
+                        :SCBSET50-PTT
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :SCBSET50-AOT
+                        :SCBSET50-DELTA
+                        :SCBSET50-PTT
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :SCBSET50-AOT
+                        :SCBSET50-PTT
                       )
 ] .
 
