@@ -54,16 +54,16 @@
              rdfs:domain :AMC .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#AssetName
+:AssetName rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :AssetProperty ;
+           rdfs:domain :Asset ;
+           rdfs:range xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#AssetProperty
 :AssetProperty rdf:type owl:DatatypeProperty ;
                rdfs:domain :Asset .
-
-
-###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BondName
-:BondName rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf :BondProperty ;
-          rdfs:domain :Bond ;
-          rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BondNumber
@@ -327,14 +327,14 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#AIS
 :AIS rdf:type owl:NamedIndividual ,
               :Stock ;
-     :StockName "แอดวานซ์ อินโฟร์ เซอร์วิส"^^xsd:string ;
+     :AssetName "แอดวานซ์ อินโฟร์ เซอร์วิส"^^xsd:string ;
      :StockSymbol "ADVANC"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#AOT
 :AOT rdf:type owl:NamedIndividual ,
               :Stock ;
-     :StockName "บมจ.ท่าอาศยานไทย"^^xsd:string ;
+     :AssetName "บมจ.ท่าอาศยานไทย"^^xsd:string ;
      :StockSymbol "AOT"^^xsd:string .
 
 
@@ -348,14 +348,14 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#CPALL
 :CPALL rdf:type owl:NamedIndividual ,
                 :Stock ;
-       :StockName "ซีพี ออลล์"^^xsd:string ;
-       :StockSymbol "CPALL"^^xsd:string .
+       :AssetName "CPALL"^^xsd:string ;
+       :StockName "ซีพี ออลล์"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#DELTA
 :DELTA rdf:type owl:NamedIndividual ,
                 :Stock ;
-       :StockName "บมจ. เดลต้า อีเลคโทรนิคส์ (ประเทศไทย)"^^xsd:string ;
+       :AssetName "บมจ. เดลต้า อีเลคโทรนิคส์ (ประเทศไทย)"^^xsd:string ;
        :StockSymbol "DELTA"^^xsd:string .
 
 
@@ -376,6 +376,7 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KAsset
 :KAsset rdf:type owl:NamedIndividual ,
                  :AMC ;
+        :Manage <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)> ;
         :AMCName "หลักทรัพย์จัดการกองทุนกสิกรไทย"^^xsd:string .
 
 
@@ -386,18 +387,50 @@
                  :FundTypeNameTH "กองทุนรวมตลาดเงิน"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#NEXT_FUNDS_NIKKEI_225_EXCHANGE
+:NEXT_FUNDS_NIKKEI_225_EXCHANGE rdf:type owl:NamedIndividual ,
+                                         :Other ;
+                                :AssetName "NEXT FUNDS NIKKEI 225 EXCHANGE"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#PTT
 :PTT rdf:type owl:NamedIndividual ,
               :Stock ;
-     :StockName "บมจ. ปตท."^^xsd:string ;
+     :AssetName "บมจ. ปตท."^^xsd:string ;
      :StockSymbol "PTT"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCB
 :SCB rdf:type owl:NamedIndividual ,
               :AMC ;
-     :Manage :SCBSET50 ;
+     :Manage :SCBNK225 ,
+             :SCBSET50 ;
      :AMCName "บลจ. ไทยพาณิชย์"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBNK225
+:SCBNK225 rdf:type owl:NamedIndividual ,
+                   :Opened-EndFund ;
+          :FundType :EquityFund ;
+          :Invest :SCBNK255-NEXT ;
+          :Dividen "false"^^xsd:boolean ;
+          :FundName """กองทุนเปิดไทยพาณิชย์หุ้นญี่ปุ่น
+(ชนิดไม่จ่ายเงินปันผล)"""^^xsd:string ;
+          :FundSymbol "SCBNK225"^^xsd:string ;
+          :MaxLoss "-31.73"^^xsd:float ;
+          :MaxProfit "20.95"^^xsd:float ;
+          :MinProfit "0.74"^^xsd:float ;
+          :ProfitFromInit "10.45"^^xsd:float ;
+          :Risk "6"^^xsd:int ;
+          :SD "19.76"^^xsd:float ;
+          :Start "2013-10-11T00:00:00"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBNK255-NEXT
+:SCBNK255-NEXT rdf:type owl:NamedIndividual ,
+                        :Percentage ;
+               :To :NEXT_FUNDS_NIKKEI_225_EXCHANGE ;
+               :Value "94.87"^^xsd:float .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSET50
@@ -469,6 +502,11 @@
 <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)> rdf:type owl:NamedIndividual ,
                                                                                                 :Opened-EndFund ;
                                                                                        :FundType :EquityFund ;
+                                                                                       :Invest <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-AIS> ,
+                                                                                               <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-AOT> ,
+                                                                                               <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-CPALL> ,
+                                                                                               <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-DELTA> ,
+                                                                                               <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LTF-A(A)-PTT> ;
                                                                                        :Dividen "false"^^xsd:boolean ;
                                                                                        :FundName "กองทุนเปิดเค เซ็ท 50 หุ้นระยะยาว-A ชนิดสะสมมูลค่า"^^xsd:string ;
                                                                                        :FundSymbol "KS50LTF-A(A)"^^xsd:string ;
@@ -537,6 +575,14 @@
                 :Silver
                 :Stock
               )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :SCBNK225
+                        :SCBSET50
+                        <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)>
+                      )
 ] .
 
 
