@@ -537,6 +537,7 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500
 :K-2500 rdf:type owl:NamedIndividual ,
                  :Opened-EndFund ;
+        :FundType :BalanceFund ;
         :Invest :K-2500-AOT ,
                 :K-2500-BOT_BOND ,
                 :K-2500-FPT ,
@@ -632,6 +633,7 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CASH
 :K-CASH rdf:type owl:NamedIndividual ,
                  :Opened-EndFund ;
+        :FundType :GeneralFixedIncomeFund ;
         :Invest :K-CASH-BOT_BOND ,
                 :K-CASH-GHB ,
                 :K-CASH-SCB_BOND ,
@@ -680,6 +682,7 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CBOND
 :K-CBOND rdf:type owl:NamedIndividual ,
                   :Opened-EndFund ;
+         :FundType :GeneralFixedIncomeFund ;
          :Invest :K-CBOND-BOT_BOND ,
                  :K-CBOND-FPT ,
                  :K-CBOND-GOVERNMENT_BOND ,
@@ -834,6 +837,7 @@ K Corporate Bond Fund"""^^xsd:string ;
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBQUALITYA
 :SCBQUALITYA rdf:type owl:NamedIndividual ,
                       :Opened-EndFund ;
+             :FundType :EquityFund ;
              :Invest :SCBQUALITYA-AIS ,
                      :SCBQUALITYA-CPALL ,
                      :SCBQUALITYA-CPF ,
@@ -946,6 +950,7 @@ SCB Thai Equity Quality Portfolio ชนิด A"""^^xsd:string ;
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSFF
 :SCBSFF rdf:type owl:NamedIndividual ,
                  :Opened-EndFund ;
+        :FundType :GeneralFixedIncomeFund ;
         :Invest :SCBSFF-AGRICULTURAL_BANK_OF_CHINA_HONG_KONG_BRANCH-12 ,
                 :SCBSFF-BANK_OF_CHINA_MACAU_BRANCH-12 ,
                 :SCBSFF-BANK_OF_CHINA_MACAU_BRANCH-6 ,
