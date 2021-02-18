@@ -26,3 +26,31 @@ SELECT *
   }
 
 ```
+
+## Get Fund that Invest same Asset
+
+
+```SPRAQL
+SELECT *
+  Where {
+    ?fund mat:To ?to
+  }
+
+```
+
+
+SELECT *
+  Where {	
+	?fund mat:Invest ?invest .
+	SELECT ?scbAsset where{
+		mat:SCBSET50 mat:Invest ?scbInvest .
+		?scbInvest mat:To ?scbAsset
+}
+
+  }
+
+
+  SELECT ?scbAsset where{
+	mat:SCBSET50 mat:Invest ?scbInvest .
+	?scbInvest mat:To ?scbAsset
+}
