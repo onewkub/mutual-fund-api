@@ -405,6 +405,14 @@
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#AGRICULTURAL_BANK_OF_CHINA_HONG_KONG_BRANCH-12
+:AGRICULTURAL_BANK_OF_CHINA_HONG_KONG_BRANCH-12 rdf:type owl:NamedIndividual ,
+                                                         :Bond ;
+                                                :AssetName "เงินฝากประจำ 12 เดือน AGRICULTURAL,BANK OF CHINA,HONG KONG BRANCH"^^xsd:string ;
+                                                :BondRange "12"^^xsd:int ;
+                                                :CreditRating "A"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#AIS
 :AIS rdf:type owl:NamedIndividual ,
               :Stock ;
@@ -419,12 +427,27 @@
      :StockSymbol "AOT"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BANK_OF_CHINA_MACAU_BRANCH-12
+:BANK_OF_CHINA_MACAU_BRANCH-12 rdf:type owl:NamedIndividual ,
+                                        :Bond ;
+                               :AssetName "เงินฝากประจำ 12 เดือน BANK OF CHINA,MACAU BRANCH"^^xsd:string ;
+                               :BondRange "12"^^xsd:int ;
+                               :CreditRating "A"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BANK_OF_CHINA_MACAU_BRANCH-6
+:BANK_OF_CHINA_MACAU_BRANCH-6 rdf:type owl:NamedIndividual ,
+                                       :Bond ;
+                              :AssetName "เงินฝากประจำ 6 เดือน BANK OF CHINA, MACAU BRANCH"^^xsd:string ;
+                              :BondRange "6"^^xsd:int ;
+                              :CreditRating "A"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BOT_BOND
 :BOT_BOND rdf:type owl:NamedIndividual ,
                    :Bond ;
           :AssetName "พันธบัตรธนาคารแห่งประเทศไทย (BOT BOND)"^^xsd:string ;
-          :CreditRating "AAA"^^xsd:string ;
-          :Value "8.31"^^xsd:float .
+          :CreditRating "AAA"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#BalanceFund
@@ -437,8 +460,22 @@
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#CPALL
 :CPALL rdf:type owl:NamedIndividual ,
                 :Stock ;
-       :AssetName "CPALL"^^xsd:string ;
-       :StockName "ซีพี ออลล์"^^xsd:string .
+       :AssetName "ซีพี ออลล์"^^xsd:string ;
+       :StockSymbol "CPALL"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#CPF
+:CPF rdf:type owl:NamedIndividual ,
+              :Stock ;
+     :AssetName "บริษัท เจริญโภคภัณฑ์อาหาร จำกัด(มหาชน)"^^xsd:string ;
+     :StockSymbol "CPF"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#CPN
+:CPN rdf:type owl:NamedIndividual ,
+              :Stock ;
+     :AssetName "เซ็นทรัลพัฒนา Central Pattana"^^xsd:string ;
+     :StockSymbol "CPN"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#DELTA
@@ -459,16 +496,21 @@
 :FPT rdf:type owl:NamedIndividual ,
               :Bond ;
      :AssetName "บมจ.เฟรเซอร์ส พร็อพเพอร์ตี้(ประเทศไทย)(FPT)"^^xsd:string ;
-     :CreditRating "A-"^^xsd:string ;
-     :Value "5.54"^^xsd:float .
+     :CreditRating "A-"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#GHB
+:GHB rdf:type owl:NamedIndividual ,
+              :Bond ;
+     :AssetName "ธนาคารอาคารสงเคราะห์(GHB)"^^xsd:string ;
+     :CreditRating "AAA"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#GOVERNMENT_BOND
 :GOVERNMENT_BOND rdf:type owl:NamedIndividual ,
                           :Bond ;
                  :AssetName "พันธบัตรรัฐบาล (GOVERNMENT BOND)"^^xsd:string ;
-                 :CreditRating "AAA"^^xsd:string ;
-                 :Value "15.73"^^xsd:float .
+                 :CreditRating "AAA"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#GeneralFixedIncomeFund
@@ -478,14 +520,171 @@
                         :FundTypeNameTH "กองทุนรวมตราสารหนี้"^^xsd:string .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#HMPRO
+:HMPRO rdf:type owl:NamedIndividual ,
+                :Bond ;
+       :AssetName "บมจ.โฮม โปรดักส์ เซ็นเตอร์"^^xsd:string ;
+       :CreditRating "AA-"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#ICBCTL
+:ICBCTL rdf:type owl:NamedIndividual ,
+                 :Bond ;
+        :AssetName "บมจ.ลีสซิ่งไอซีบีซี(ไทย)"^^xsd:string ;
+        :CreditRating "AAA"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500
+:K-2500 rdf:type owl:NamedIndividual ,
+                 :Opened-EndFund ;
+        :Invest :K-2500-AOT ,
+                :K-2500-BOT_BOND ,
+                :K-2500-FPT ,
+                :K-2500-GOVERNMENT_BOND ,
+                :K-2500-HMPRO ,
+                :K-2500-ICBCTL ,
+                :K-2500-KBANK ,
+                :K-2500-KCE ,
+                :K-2500-MINT ,
+                :K-2500-PTT ;
+        :Dividen "false"^^xsd:boolean ;
+        :FundName "กองทุนเปิดเค ไลฟ์สไตล์ 2500 K LIFESTYLE FUND 2500"^^xsd:string ;
+        :FundSymbol "K-2500"^^xsd:string ;
+        :MaxLoss "-5.62"^^xsd:float ;
+        :MaxProfit "7.88"^^xsd:float ;
+        :MinProfit "1.15"^^xsd:float ;
+        :ProfitFromInit "3.09"^^xsd:float ;
+        :Risk "5"^^xsd:int ;
+        :SD "2.5"^^xsd:float ;
+        :Start "2005-05-24T00:00:00"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-AOT
+:K-2500-AOT rdf:type owl:NamedIndividual ,
+                     :Percentage ;
+            :To :AOT ;
+            :Value "1.01"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-BOT_BOND
+:K-2500-BOT_BOND rdf:type owl:NamedIndividual ,
+                          :Percentage ;
+                 :To :BOT_BOND ;
+                 :Value "29.16"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-FPT
+:K-2500-FPT rdf:type owl:NamedIndividual ,
+                     :Percentage ;
+            :To :FPT ;
+            :Value "1.82"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-GOVERNMENT_BOND
+:K-2500-GOVERNMENT_BOND rdf:type owl:NamedIndividual ,
+                                 :Percentage ;
+                        :To :GOVERNMENT_BOND ;
+                        :Value "41.62"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-HMPRO
+:K-2500-HMPRO rdf:type owl:NamedIndividual ,
+                       :Percentage ;
+              :To :HMPRO ;
+              :Value "3.58"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-ICBCTL
+:K-2500-ICBCTL rdf:type owl:NamedIndividual ,
+                        :Percentage ;
+               :To :ICBCTL ;
+               :Value "1.24"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-KBANK
+:K-2500-KBANK rdf:type owl:NamedIndividual ,
+                       :Percentage ;
+              :To :KBANK ;
+              :Value "0.69"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-KCE
+:K-2500-KCE rdf:type owl:NamedIndividual ,
+                     :Percentage ;
+            :To :KCE ;
+            :Value "0.97"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-MINT
+:K-2500-MINT rdf:type owl:NamedIndividual ,
+                      :Percentage ;
+             :To :MINT ;
+             :Value "0.76"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-2500-PTT
+:K-2500-PTT rdf:type owl:NamedIndividual ,
+                     :Percentage ;
+            :To :PTT ;
+            :Value "0.69"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CASH
+:K-CASH rdf:type owl:NamedIndividual ,
+                 :Opened-EndFund ;
+        :Invest :K-CASH-BOT_BOND ,
+                :K-CASH-GHB ,
+                :K-CASH-SCB_BOND ,
+                :K-CASH-TREASURY_BILL ;
+        :Dividen "false"^^xsd:boolean ;
+        :FundName "กองทุนเปิดเค บริหารเงิน K Cash Management Fund"^^xsd:string ;
+        :FundSymbol "K-CASH"^^xsd:string ;
+        :HoldRange "0.11"^^xsd:float ;
+        :MaxLoss "-0.01"^^xsd:float ;
+        :MaxProfit "2.46"^^xsd:float ;
+        :MinProfit "0.56"^^xsd:float ;
+        :ProfitFromInit "1.86"^^xsd:float ;
+        :Risk "1"^^xsd:int ;
+        :SD "0.05"^^xsd:float ;
+        :Start "2005-12-01T00:00:00"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CASH-BOT_BOND
+:K-CASH-BOT_BOND rdf:type owl:NamedIndividual ,
+                          :Percentage ;
+                 :To :BOT_BOND ;
+                 :Value "69.2"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CASH-GHB
+:K-CASH-GHB rdf:type owl:NamedIndividual ,
+                     :Percentage ;
+            :To :GHB ;
+            :Value "3.44"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CASH-SCB_BOND
+:K-CASH-SCB_BOND rdf:type owl:NamedIndividual ,
+                          :Percentage ;
+                 :To :SCB_BOND ;
+                 :Value "11.02"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CASH-TREASURY_BILL
+:K-CASH-TREASURY_BILL rdf:type owl:NamedIndividual ,
+                               :Percentage ;
+                      :To :TREASURY_BILL ;
+                      :Value "18.0"^^xsd:float .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CBOND
 :K-CBOND rdf:type owl:NamedIndividual ,
                   :Opened-EndFund ;
-         :Invest :BOT_BOND ,
-                 :FPT ,
-                 :GOVERNMENT_BOND ,
-                 :THANI ,
-                 :WHA ;
+         :Invest :K-CBOND-BOT_BOND ,
+                 :K-CBOND-FPT ,
+                 :K-CBOND-GOVERNMENT_BOND ,
+                 :K-CBOND-THANI ,
+                 :K-CBOND-WHA ;
          :Dividen "false"^^xsd:boolean ;
          :FundName """กองทุนเปิดเค หุ้นกู้
 K Corporate Bond Fund"""^^xsd:string ;
@@ -500,12 +699,83 @@ K Corporate Bond Fund"""^^xsd:string ;
          :Start "1999-11-22T00:00:00"^^xsd:dateTime .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CBOND-BOT_BOND
+:K-CBOND-BOT_BOND rdf:type owl:NamedIndividual ,
+                           :Percentage ;
+                  :To :BOT_BOND ;
+                  :Value "8.31"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CBOND-FPT
+:K-CBOND-FPT rdf:type owl:NamedIndividual ,
+                      :Percentage ;
+             :To :FPT ;
+             :Value "5.54"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CBOND-GOVERNMENT_BOND
+:K-CBOND-GOVERNMENT_BOND rdf:type owl:NamedIndividual ,
+                                  :Percentage ;
+                         :To :GOVERNMENT_BOND ;
+                         :Value "15.73"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CBOND-THANI
+:K-CBOND-THANI rdf:type owl:NamedIndividual ,
+                        :Percentage ;
+               :To :THANI ;
+               :Value "7.7"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#K-CBOND-WHA
+:K-CBOND-WHA rdf:type owl:NamedIndividual ,
+                      :Percentage ;
+             :To :WHA ;
+             :Value "5.31"^^xsd:float .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KAsset
 :KAsset rdf:type owl:NamedIndividual ,
                  :AMC ;
         :Manage :K-CBOND ,
                 <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)> ;
         :AMCName "หลักทรัพย์จัดการกองทุนกสิกรไทย"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KBANK
+:KBANK rdf:type owl:NamedIndividual ,
+                :Stock ;
+       :AssetName "บมจ.ธนาคารกสิกรไทย"^^xsd:string ;
+       :StockSymbol "KBANK"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KCE
+:KCE rdf:type owl:NamedIndividual ,
+              :Stock ;
+     :AssetName "บมจ.เคซีอี อีเลคโทรนิคส์"^^xsd:string ;
+     :StockSymbol "KCE"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KTB-22
+:KTB-22 rdf:type owl:NamedIndividual ,
+                 :Bond ;
+        :AssetName "เงินฝากประจำ 22 เดือน บมจ.ธนาคารกรุงไทย"^^xsd:string ;
+        :BondRange "22"^^xsd:int ;
+        :CreditRating "AA+"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#MINT
+:MINT rdf:type owl:NamedIndividual ,
+               :Stock ;
+      :AssetName "บมจ.ไมเนอร์ อินเตอร์เนชั่นแนล"^^xsd:float ;
+      :StockSymbol "MINT"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#MTC
+:MTC rdf:type owl:NamedIndividual ,
+              :Stock ;
+     :AssetName "เมืองไทยแคปปิตอล"^^xsd:string ;
+     :StockSymbol "MTC"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#MoneyMarketFund
@@ -559,6 +829,62 @@ K Corporate Bond Fund"""^^xsd:string ;
                         :Percentage ;
                :To :NEXT_FUNDS_NIKKEI_225_EXCHANGE ;
                :Value "94.87"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBQUALITYA
+:SCBQUALITYA rdf:type owl:NamedIndividual ,
+                      :Opened-EndFund ;
+             :Invest :SCBQUALITYA-AIS ,
+                     :SCBQUALITYA-CPALL ,
+                     :SCBQUALITYA-CPF ,
+                     :SCBQUALITYA-CPN ,
+                     :SCBQUALITYA-MTC ;
+             :Dividen "false"^^xsd:boolean ;
+             :FundName """กองทุนเปิดไทยพาณิชย์ Thai Equity Quality Portfolio
+SCB Thai Equity Quality Portfolio ชนิด A"""^^xsd:string ;
+             :FundSymbol "SCBQUALITYA"^^xsd:string ;
+             :MaxLoss "-36.62"^^xsd:float ;
+             :MaxProfit "0.55"^^xsd:float ;
+             :MinProfit "0.55"^^xsd:float ;
+             :ProfitFromInit "-7.82"^^xsd:float ;
+             :Risk "6"^^xsd:int ;
+             :SD "32.64"^^xsd:float ;
+             :Start "2019-12-19T00:00:00"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBQUALITYA-AIS
+:SCBQUALITYA-AIS rdf:type owl:NamedIndividual ,
+                          :Percentage ;
+                 :To :AIS ;
+                 :Value "8.82"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBQUALITYA-CPALL
+:SCBQUALITYA-CPALL rdf:type owl:NamedIndividual ,
+                            :Percentage ;
+                   :To :CPALL ;
+                   :Value "8.47"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBQUALITYA-CPF
+:SCBQUALITYA-CPF rdf:type owl:NamedIndividual ,
+                          :Percentage ;
+                 :To :CPF ;
+                 :Value "6.23"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBQUALITYA-CPN
+:SCBQUALITYA-CPN rdf:type owl:NamedIndividual ,
+                          :Percentage ;
+                 :To :CPN ;
+                 :Value "8.28"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBQUALITYA-MTC
+:SCBQUALITYA-MTC rdf:type owl:NamedIndividual ,
+                          :Percentage ;
+                 :To :MTC ;
+                 :Value "6.46"^^xsd:float .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSET50
@@ -617,6 +943,71 @@ K Corporate Bond Fund"""^^xsd:string ;
               :Value "10.98"^^xsd:float .
 
 
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSFF
+:SCBSFF rdf:type owl:NamedIndividual ,
+                 :Opened-EndFund ;
+        :Invest :SCBSFF-AGRICULTURAL_BANK_OF_CHINA_HONG_KONG_BRANCH-12 ,
+                :SCBSFF-BANK_OF_CHINA_MACAU_BRANCH-12 ,
+                :SCBSFF-BANK_OF_CHINA_MACAU_BRANCH-6 ,
+                :SCBSFF-KTB-22 ,
+                :SCBSFF-พันธบัตรธนาคารแห่งประเทศไทย-52-63-87 ;
+        :Dividen "false"^^xsd:boolean ;
+        :FundName "กองทุนเปิดไทยพาณิชย์ตราสารหนี้ระยะสั้น SCB Short Term Fixed Income Fund"^^xsd:string ;
+        :FundSymbol "SCBSFF"^^xsd:string ;
+        :HoldRange "0.25"^^xsd:float ;
+        :MaxLoss "0.0"^^xsd:float ;
+        :MaxProfit "2.23"^^xsd:float ;
+        :MinProfit "0.28"^^xsd:float ;
+        :ProfitFromInit "3.11"^^xsd:float ;
+        :Risk "4"^^xsd:int ;
+        :SD "0.03"^^xsd:float ;
+        :Start "1997-02-27T00:00:00"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSFF-AGRICULTURAL_BANK_OF_CHINA_HONG_KONG_BRANCH-12
+:SCBSFF-AGRICULTURAL_BANK_OF_CHINA_HONG_KONG_BRANCH-12 rdf:type owl:NamedIndividual ,
+                                                                :Percentage ;
+                                                       :To :AGRICULTURAL_BANK_OF_CHINA_HONG_KONG_BRANCH-12 ;
+                                                       :Value "3.89"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSFF-BANK_OF_CHINA_MACAU_BRANCH-12
+:SCBSFF-BANK_OF_CHINA_MACAU_BRANCH-12 rdf:type owl:NamedIndividual ,
+                                               :Percentage ;
+                                      :To :BANK_OF_CHINA_MACAU_BRANCH-12 ;
+                                      :Value "5.55"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSFF-BANK_OF_CHINA_MACAU_BRANCH-6
+:SCBSFF-BANK_OF_CHINA_MACAU_BRANCH-6 rdf:type owl:NamedIndividual ,
+                                              :Percentage ;
+                                     :To :BANK_OF_CHINA_MACAU_BRANCH-6 ;
+                                     :Value "3.61"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSFF-KTB-22
+:SCBSFF-KTB-22 rdf:type owl:NamedIndividual ,
+                        :Percentage ;
+               :To :KTB-22 ;
+               :Value "4.53"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCBSFF-พันธบัตรธนาคารแห่งประเทศไทย-52-63-87
+:SCBSFF-พันธบัตรธนาคารแห่งประเทศไทย-52-63-87 rdf:type owl:NamedIndividual ,
+                                                      :Percentage ;
+                                             :To :พันธบัตรธนาคารแห่งประเทศไทย-52 ,
+                                                 :พันธบัตรธนาคารแห่งประเทศไทย-63 ,
+                                                 :พันธบัตรธนาคารแห่งประเทศไทย-87 ;
+                                             :Value "5.28"^^xsd:float .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SCB_BOND
+:SCB_BOND rdf:type owl:NamedIndividual ,
+                   :Bond ;
+          :AssetName "บมจ.ธนาคารไทยพาณิชย์(SCB)"^^xsd:string ;
+          :CreditRating "AA+"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#SectorFund
 :SectorFund rdf:type owl:NamedIndividual ,
                      :FundType ;
@@ -628,16 +1019,45 @@ K Corporate Bond Fund"""^^xsd:string ;
 :THANI rdf:type owl:NamedIndividual ,
                 :Bond ;
        :AssetName "บมจ.ราชธานีลิสซิ่ง (THANI)"^^xsd:string ;
-       :CreditRating "A-"^^xsd:string ;
-       :Value "7.7"^^xsd:float .
+       :CreditRating "A-"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#TREASURY_BILL
+:TREASURY_BILL rdf:type owl:NamedIndividual ,
+                        :Bond ;
+               :AssetName "ตั๋วเงินคลังและตั๋วสัญญาใช้เงินที่ออกโดยกระทรวงการคลัง (TREASURY BILL)"^^xsd:string ;
+               :CreditRating "AAA"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#WHA
 :WHA rdf:type owl:NamedIndividual ,
               :Bond ;
      :AssetName "บมจ.ดับบลิวเอชเอ คอปอร์เรชั่น"^^xsd:string ;
-     :CreditRating "A-"^^xsd:string ;
-     :Value "5.31"^^xsd:float .
+     :CreditRating "A-"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#พันธบัตรธนาคารแห่งประเทศไทย-52
+:พันธบัตรธนาคารแห่งประเทศไทย-52 rdf:type owl:NamedIndividual ,
+                                         :Bond ;
+                                :AssetName "พันธบัตรธนาคารแห่งประเทศไทยงวดที่ 52"^^xsd:string ;
+                                :BondNumber "52"^^xsd:int ;
+                                :CreditRating "AAA"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#พันธบัตรธนาคารแห่งประเทศไทย-63
+:พันธบัตรธนาคารแห่งประเทศไทย-63 rdf:type owl:NamedIndividual ,
+                                         :Bond ;
+                                :AssetName "พันธบัตรธนาคารแห่งประเทศไทย-63"^^xsd:string ;
+                                :BondNumber "63"^^xsd:int ;
+                                :CreditRating "AAA"^^xsd:string .
+
+
+###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#พันธบัตรธนาคารแห่งประเทศไทย-87
+:พันธบัตรธนาคารแห่งประเทศไทย-87 rdf:type owl:NamedIndividual ,
+                                         :Bond ;
+                                :AssetName "พันธบัตรธนาคารแห่งประเทศไทย-87"^^xsd:string ;
+                                :BondNumber "87"^^xsd:int ;
+                                :CreditRating "AAA"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)
@@ -721,6 +1141,52 @@ K Corporate Bond Fund"""^^xsd:string ;
 
 
 [ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :K-2500
+                        :K-CASH
+                        :K-CBOND
+                        :SCBNK225
+                        :SCBQUALITYA
+                        :SCBSET50
+                        :SCBSFF
+                        <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :K-2500
+                        :K-CASH
+                        :K-CBOND
+                        :SCBNK225
+                        :SCBSET50
+                        :SCBSFF
+                        <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :K-2500
+                        :K-CASH
+                        :K-CBOND
+                        :SCBNK225
+                        :SCBSET50
+                        <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :K-CASH
+                        :K-CBOND
+                        :SCBNK225
+                        :SCBSET50
+                        <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
   owl:distinctMembers ( :K-CBOND
                         :SCBNK225
                         :SCBSET50
@@ -733,6 +1199,13 @@ K Corporate Bond Fund"""^^xsd:string ;
   owl:distinctMembers ( :SCBNK225
                         :SCBSET50
                         <http://www.semanticweb.org/wachi/ontologies/2021/1/mutual-fund-ontology#KS50LFT-A(A)>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :SCBNK255-NEXT
+                        :SCBSET50-AIS
                       )
 ] .
 
