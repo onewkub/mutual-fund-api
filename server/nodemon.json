@@ -1,0 +1,9 @@
+{
+  "watch": ["./src"],
+  "verbose": true,
+  "ignore": ["*.test.ts", "fixtures/*", ".git", "node_modules/**/node_modules"],
+  "ext": "ts",
+  "execMap": {
+    "ts": "npx ts-node ./src/index.ts"
+  }
+}
