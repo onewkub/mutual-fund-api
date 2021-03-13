@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5432/mutual-fund?schema=public"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["createMany"]
+}
+
+model AMC {
+  id      String @id @db.VarChar(255)
+  name_th String
+  name_en String
+  funds   Fund[]
+}
+
+model Fund {
+  projid  String  @id @db.VarChar(255)
+  symbol  String
+  price   Price[]
+  name_th String
+  name_en String
+  amc     AMC     @relation(fields: [amc_id], references: [id])
+  amc_id  String  @db.VarChar(255)
+}
+
+model Price {
+  fund      Fund     @relation(fields: [fund_id], references: [projid])
+  fund_id   String   @id @db.VarChar(255)
+  price     Float
+  create_at DateTime @default(now())
+
+}
