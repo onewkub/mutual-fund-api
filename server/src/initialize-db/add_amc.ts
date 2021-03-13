@@ -1,15 +1,9 @@
-import { IAMC } from '../interface/IAMC'
-import { httpRequest_SEC } from '../lib/httpRequest'
+import { IAMC } from '../interface/AMC'
+import { IAMC_SEC } from '../interface/SEC'
 import prisma from '../lib/prisma'
+import { httpRequest_SEC } from '../lib/sec_api'
 
-interface IAMC_old {
-  unique_id: string
-  name_th: string
-  name_en: string
-  last_upd_date: Date
-}
-
-function MapToAMCModel(data: IAMC_old[]): IAMC[] {
+function MapToAMCModel(data: IAMC_SEC[]): IAMC[] {
   const res: IAMC[] = data.map((element) => ({
     id: element.unique_id,
     name_th: element.name_th,
@@ -20,10 +14,17 @@ function MapToAMCModel(data: IAMC_old[]): IAMC[] {
 
 async function AddAMC() {
   try {
-    const res = await httpRequest_SEC.get<IAMC_old[]>('/FundFactsheet/fund/amc')
+    console.log('Fetching AMC data from SEC....')
+    const res = await httpRequest_SEC.get<IAMC_SEC[]>('/FundFactsheet/fund/amc')
+    console.log('Fetching AMC data success')
+
     const data = MapToAMCModel(res.data)
+
+    console.log('Insert AMC data to Local Database....')
+
     const count = await prisma.aMC.createMany({ data })
-    console.log(count)
+
+    console.log('Insert AMC data success')
   } catch (err) {
     console.log(err.response.data)
   }

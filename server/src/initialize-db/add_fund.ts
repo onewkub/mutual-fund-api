@@ -1,21 +1,9 @@
-import { IFund } from '../interface/IFund'
-import { httpRequest_SEC } from '../lib/httpRequest'
+import { IFund } from '../interface/Fund'
+import { IProj } from '../interface/SEC'
 import prisma from '../lib/prisma'
+import { httpRequest_SEC } from '../lib/sec_api'
 
-interface IProj {
-  last_upd_date: string
-  proj_id: string
-  regis_id: string
-  regis_date: Date
-  cancel_date: Date
-  proj_name_th: string
-  proj_name_en: string
-  proj_abbr_name: string
-  fund_status: string
-  unique_id: string
-  premit_us_investment: string
-  invest_country_flag: string
-}
+
 
 function MapToIFundModel(data: IProj[], amc_id: string): IFund[] {
   const res: IFund[] = data

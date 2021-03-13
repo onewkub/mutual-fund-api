@@ -7,13 +7,12 @@ interface IHeader {
 class HttpRequest {
   axiosInstance: AxiosInstance
   constructor(url: string) {
-    // this.axios = axios
     this.axiosInstance = axios.create({
       baseURL: url,
       timeout: 120000,
     })
-    // this.axiosInstance.defaults.headers['Ocp-Apim-Subscription-Key'] =
-    //   '02e827bbdcb540d48b07d08a22715302'
+    this.axiosInstance.defaults.headers['Content-Type'] =
+      'application/x-www-form-urlencoded'
 
     this.axiosInstance.interceptors.request.use(
       function (config) {
@@ -42,8 +41,6 @@ class HttpRequest {
 
   setHeader(header: IHeader) {
     this.axiosInstance.defaults.headers.common[header.key] = header.value
-    this.axiosInstance.defaults.headers.post['Content-Type'] =
-      'application/x-www-form-urlencoded'
   }
 
   get<type>(methodName: string, data?: any) {
@@ -88,8 +85,4 @@ class HttpRequest {
 
 export default HttpRequest
 
-export const httpRequest_SEC = new HttpRequest('https://api.sec.or.th')
-httpRequest_SEC.setHeader({
-  key: 'Ocp-Apim-Subscription-Key',
-  value: '02e827bbdcb540d48b07d08a22715302',
-})
+

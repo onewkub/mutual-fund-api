@@ -1,0 +1,181 @@
+@prefix : <http://www.semanticweb.org/mutual-fund#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/mutual-fund> .
+
+<http://www.semanticweb.org/mutual-fund> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/mutual-fund#invest
+:invest rdf:type owl:ObjectProperty ;
+        rdfs:domain :fund ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty :invest ;
+                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                      owl:onClass :fund
+                    ] ;
+        rdfs:range :assets ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty :invest ;
+                      owl:someValuesFrom :assets
+                    ] .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/mutual-fund#asset_id
+:asset_id rdf:type owl:DatatypeProperty ;
+          rdfs:domain :assets ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :asset_id ;
+                        owl:allValuesFrom xsd:string
+                      ] ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/mutual-fund#asset_name
+:asset_name rdf:type owl:DatatypeProperty ;
+            rdfs:domain :assets ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :asset_name ;
+                          owl:allValuesFrom xsd:string
+                        ] ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/mutual-fund#asset_symbol
+:asset_symbol rdf:type owl:DatatypeProperty ;
+              rdfs:domain :assets ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :asset_symbol ;
+                            owl:allValuesFrom xsd:string
+                          ] ;
+              rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/mutual-fund#dividend
+:dividend rdf:type owl:DatatypeProperty ;
+          rdfs:domain :fund ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :dividend ;
+                        owl:allValuesFrom xsd:boolean
+                      ] ;
+          rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/mutual-fund#project_id
+:project_id rdf:type owl:DatatypeProperty ;
+            rdfs:domain :fund ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :project_id ;
+                          owl:allValuesFrom xsd:string
+                        ] ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/mutual-fund#project_name
+:project_name rdf:type owl:DatatypeProperty ;
+              rdfs:domain :fund ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :project_name ;
+                            owl:allValuesFrom xsd:string
+                          ] ;
+              rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/mutual-fund#risk_rate
+:risk_rate rdf:type owl:DatatypeProperty ;
+            rdfs:domain :fund ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :risk_rate ;
+                          owl:allValuesFrom xsd:integer
+                        ] ;
+            rdfs:range xsd:integer .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/mutual-fund#alternative_investment_fund
+:alternative_investment_fund rdf:type owl:Class ;
+                              rdfs:subClassOf :fund .
+
+
+###  http://www.semanticweb.org/mutual-fund#assets
+:assets rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mutual-fund#debenture
+:debenture rdf:type owl:Class ;
+            rdfs:subClassOf :assets .
+
+
+###  http://www.semanticweb.org/mutual-fund#deposit
+:deposit rdf:type owl:Class ;
+          rdfs:subClassOf :assets .
+
+
+###  http://www.semanticweb.org/mutual-fund#derivative
+:derivative rdf:type owl:Class ;
+            rdfs:subClassOf :assets .
+
+
+###  http://www.semanticweb.org/mutual-fund#equity_fund
+:equity_fund rdf:type owl:Class ;
+              rdfs:subClassOf :fund .
+
+
+###  http://www.semanticweb.org/mutual-fund#fixed_income_fund
+:fixed_income_fund rdf:type owl:Class ;
+                    rdfs:subClassOf :fund .
+
+
+###  http://www.semanticweb.org/mutual-fund#fund
+:fund rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mutual-fund#gold
+:gold rdf:type owl:Class ;
+      rdfs:subClassOf :assets .
+
+
+###  http://www.semanticweb.org/mutual-fund#groverment_bond
+:groverment_bond rdf:type owl:Class ;
+                  rdfs:subClassOf :assets .
+
+
+###  http://www.semanticweb.org/mutual-fund#mixed_fund
+:mixed_fund rdf:type owl:Class ;
+            rdfs:subClassOf :fund .
+
+
+###  http://www.semanticweb.org/mutual-fund#other
+:other rdf:type owl:Class ;
+        rdfs:subClassOf :assets .
+
+
+###  http://www.semanticweb.org/mutual-fund#stock
+:stock rdf:type owl:Class ;
+        rdfs:subClassOf :assets .
+
+
+###  http://www.semanticweb.org/mutual-fund#unit_trust
+:unit_trust rdf:type owl:Class ;
+            rdfs:subClassOf :assets .
+
+
+###  http://www.semanticweb.org/mutual-fund#warrant
+:warrant rdf:type owl:Class ;
+          rdfs:subClassOf :assets .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

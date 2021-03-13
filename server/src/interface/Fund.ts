@@ -5,3 +5,4 @@ export interface IFund {
   name_en: string
   amc_id: string
 }
+
