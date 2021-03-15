@@ -191,6 +191,7 @@ async function getFundDividend(project_id: string) {
       `/FundFactsheet/fund/${project_id}/dividend`,
     )
     // if (res.data) console.log(res.data)
+    // if (res.data.dividend_policy === 'Y') console.log('YESSSSSSS DON"T ')
     return res.data.dividend_policy === 'Y' ? true : false
   } catch (err) {
     console.log(err)
@@ -210,14 +211,11 @@ async function getFundRisk(project_id: string) {
 
 async function main() {
   await addFund('C0000000239')
-  console.log('waiting for 100 sec')
+  console.log('waiting for 300 sec')
   await clockTime(300)
-  // await new Promise((resolve) => setTimeout(resolve, 1000 * 100))
   await addFund('C0000000329')
-  console.log('waiting for 100 Sec')
+  console.log('waiting for 300 Sec')
   await clockTime(300)
-
-  // await new Promise((resolve) => setTimeout(resolve, 1000 * 100))
   await addFund('C0000000021')
 }
 
