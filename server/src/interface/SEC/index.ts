@@ -44,3 +44,42 @@ export interface ILost {
   sd_five_year_percent: string
   tracking_error_percent: string
 }
+
+export interface IDividend {
+  last_upd_date: string
+  class_abbr_name: string
+  dividend_policy: string
+  dividend_policy_remark: string
+  dividend_details: IDividendDetail[]
+}
+
+export interface IDividendDetail {
+  book_closing_date: string
+  payment_date: string
+  dividend_per_share: string
+}
+
+export interface IClassFund {
+  proj_id: string
+  last_upd_date: string
+  proj_abbr_name: string
+  class_abbr_name: string
+  class_name: string
+  class_additional_desc: string
+}
+
+export interface IPolicy {
+  last_upd_date: string
+  policy_desc: string
+  investment_policy_desc: string
+  management_style: string
+}
+
+export interface IAsset {
+  proj_id: string
+  assetseq: string
+  secur_name: string
+  secur_abbr_name: string
+  period: string
+  secur_Invest_size: string
+}

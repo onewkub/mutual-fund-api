@@ -26,6 +26,7 @@ export function getRiskAtInteger(risk: string): number {
 export function mapFundPolicy(policy: string) {
   switch (policy) {
     case 'ตราสารทุน':
+    case 'ตราสารแห่งทุน':
       return 'equity_fund'
     case 'ตราสารหนี้':
       return 'fixed_income_fund'

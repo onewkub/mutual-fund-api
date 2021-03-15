@@ -1,9 +1,8 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 interface IHeader {
   key: string
   value: string
 }
-
 class HttpRequest {
   axiosInstance: AxiosInstance
   constructor(url: string) {
@@ -17,7 +16,6 @@ class HttpRequest {
     this.axiosInstance.interceptors.request.use(
       function (config) {
         // Do something before request is sent
-        // console.log(token)
         return config
       },
       function (error) {
@@ -28,12 +26,26 @@ class HttpRequest {
 
     // Add a response interceptor
     this.axiosInstance.interceptors.response.use(
-      function (response) {
+      (response) => {
         // Do something with response data
         return response
       },
-      function (error) {
+      (error) => {
+        // const {
+        //   config,
+        //   response: { status },
+        // } = error
+        // const originalRequest = config
         // Do something with response error
+        // if (status === 421) {
+        //   return new Promise((resolve, reject) => {
+        //     console.log('waiting for 300 second')
+        //     setTimeout(
+        //       () => resolve(this.axiosInstance(originalRequest)),
+        //       1000 * 300,
+        //     )
+        //   })
+        // }
         return Promise.reject(error)
       },
     )
@@ -43,20 +55,20 @@ class HttpRequest {
     this.axiosInstance.defaults.headers.common[header.key] = header.value
   }
 
-  get<type>(methodName: string, data?: any) {
-    return this.axiosInstance.get<type>(methodName, data)
+  get<type>(methodName: string, config?: AxiosRequestConfig) {
+    return this.axiosInstance.get<type>(methodName, config)
   }
 
-  post<type>(methodName: string, data?: any) {
-    return this.axiosInstance.post<type>(methodName, data)
+  post<type>(methodName: string, data?: any, config?: AxiosRequestConfig) {
+    return this.axiosInstance.post<type>(methodName, data, config)
   }
 
-  put<type>(methodName: string, data?: any) {
-    return this.axiosInstance.put<type>(methodName, data)
+  put<type>(methodName: string, data?: any, config?: AxiosRequestConfig) {
+    return this.axiosInstance.put<type>(methodName, data, config)
   }
 
-  delete<type>(methodName: string, data?: any) {
-    return this.axiosInstance.delete<type>(methodName, data)
+  delete<type>(methodName: string, config?: AxiosRequestConfig) {
+    return this.axiosInstance.delete<type>(methodName, config)
   }
 
   // request(type, url, data) {
@@ -84,5 +96,3 @@ class HttpRequest {
 // const httpRequest = new HttpRequest()
 
 export default HttpRequest
-
-

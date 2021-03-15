@@ -1,14 +1,16 @@
 import { IFund } from '../interface/Fund'
 import {
   IClassFund,
-  IDividend,
+  // IDividend,
   ILost,
   IPolicy,
   IProj,
   IRisk,
 } from '../interface/SEC'
+import { addFundOntology } from '../lib/ontology_api'
 import prisma from '../lib/prisma'
 import { httpRequest_SEC } from '../lib/sec_api'
+import { addTop5Asset } from './add_asset'
 import { getRiskAtInteger, mapFundPolicy } from './helper'
 
 function mapToIFundModel(data: IProj[], amc_id: string): IFund[] {
@@ -36,25 +38,43 @@ async function addFund(amc_id: string) {
 
     const data = mapToIFundModel(res.data, amc_id)
 
-    addFundToOntology(data)
-    // console.log('Insert Fund data to Local Database....')
+    console.log('Insert Fund data to Local Database....')
 
-    // await prisma.fund.createMany({ data })
+    await prisma.fund.createMany({ data, skipDuplicates: true })
+
+    console.log('Insert Fund data to Knowledgebase....')
+
+    await addFundToOntology(data)
 
     // console.log('Insert Fund data success')
-  } catch (e) {
-    console.log(e)
+    return new Promise(() => {
+      setTimeout(() => console.log(`END for ${amc_id}`), 5000)
+    })
+  } catch (err) {
+    console.log(err)
   }
 }
 
 async function addFundToOntology(fund_data: IFund[]) {
-  fund_data.map((element) => element.projid)
+  const project_ids = fund_data.map((element) => element.projid)
 
-  const res = await Promise.all(
+  const res: any[] = await Promise.all(
     fund_data.map((element) => getProjectClassInfo(element)),
   )
-  const data = res
-  console.log(data)
+
+  const data = [].concat(...res)
+  console.log('insert Fund to Ontology...')
+  await Promise.all(
+    data.map((element) => {
+      addFundOntology(element)
+    }),
+  )
+
+  // console.log('fetching asset from all fund...')
+  await Promise.all(project_ids.map((element) => addTop5Asset(element)))
+
+  // console.log('add top 5 asset and invest to Ontology complete')
+  console.log('insert Fund to Ontology complete')
 }
 /**
  * to do
@@ -71,13 +91,25 @@ async function getProjectClassInfo(projectInfo: IFund) {
   const fund_loss = getLoss(projectInfo.projid)
   const fund_risk = getFundRisk(projectInfo.projid)
   const res = await Promise.all([fund_class, fund_policy, fund_loss, fund_risk])
-  return {
+
+  const res_1 = {
     project_id: projectInfo.projid,
     all_class: res[0],
     fund_policy: res[1],
     fund_loss: res[2],
     fund_risk: res[3],
   }
+  // Seperate to sub class
+
+  const res_2 = res_1.all_class?.map((element) => ({
+    ...element,
+    project_loss: res_1.fund_loss,
+    project_risk: res_1.fund_risk,
+    project_policy: res_1.fund_policy,
+  }))
+  // console.log(res_2)
+
+  return res_2
 }
 
 async function getLoss(project_id: string) {
@@ -97,8 +129,8 @@ async function getLoss(project_id: string) {
     }
     // console.log(avg)
     return avg
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    console.log(err)
   }
 }
 
@@ -108,8 +140,8 @@ async function getFundPolicy(project_id: string) {
       `/FundFactsheet/fund/${project_id}/policy`,
     )
     return mapFundPolicy(res.data.policy_desc)
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    console.log(err)
   }
 }
 
@@ -160,14 +192,23 @@ async function getFundRisk(project_id: string) {
     )
     return getRiskAtInteger(res.data.risk_spectrum)
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 }
 
-addFund('C0000000239')
-  .catch((e) => {
-    console.log(e)
-  })
-  .finally(() => {
-    prisma.$disconnect()
-  })
+async function main() {
+  await addFund('C0000000239')
+  console.log('waiting for 5 Minute')
+  await new Promise(()=> setTimeout(()=> {console.log('Okay Next'), 1000*300}))
+  await addFund('C0000000329')
+  console.log('waiting for 5 Minute')
+  await new Promise(() =>
+    setTimeout(() => {
+      console.log('Okay Next'), 1000 * 5
+    }),
+  )
+  await addFund('C0000000021')
+  prisma.$disconnect()
+}
+
+main()

@@ -26,11 +26,9 @@ async function AddAMC() {
 
     console.log('Insert AMC data success')
   } catch (err) {
-    console.log(err.response.data)
+    console.log(err)
   }
 }
-
-
 
 AddAMC()
   .catch((e) => {
