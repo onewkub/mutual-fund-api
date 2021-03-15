@@ -1,6 +1,7 @@
 import { IFund } from '../interface/Fund'
 import {
   IClassFund,
+  IDividend,
   // IDividend,
   ILost,
   IPolicy,
@@ -15,7 +16,11 @@ import { getRiskAtInteger, mapFundPolicy } from './helper'
 
 function mapToIFundModel(data: IProj[], amc_id: string): IFund[] {
   const res: IFund[] = data
-    .filter((element) => element.fund_status === 'RG')
+    .filter(
+      (element) =>
+        element.fund_status === 'RG' &&
+        new Date(element.regis_date) > new Date('2014-12-31'),
+    )
     .map((element) => ({
       projid: element.proj_id,
       symbol: element.proj_abbr_name,
@@ -46,10 +51,11 @@ async function addFund(amc_id: string) {
 
     await addFundToOntology(data)
 
-    // console.log('Insert Fund data success')
-    return new Promise(() => {
-      setTimeout(() => console.log(`END for ${amc_id}`), 5000)
-    })
+    await prisma.$disconnect()
+    console.log(`END for ${amc_id}`)
+    // return new Promise(() => {
+    //   setTimeout(() => console.log(`END for ${amc_id}`), 5000)
+    // })
   } catch (err) {
     console.log(err)
   }
@@ -90,7 +96,14 @@ async function getProjectClassInfo(projectInfo: IFund) {
   const fund_policy = getFundPolicy(projectInfo.projid)
   const fund_loss = getLoss(projectInfo.projid)
   const fund_risk = getFundRisk(projectInfo.projid)
-  const res = await Promise.all([fund_class, fund_policy, fund_loss, fund_risk])
+  const fund_dividend = getFundDividend(projectInfo.projid)
+  const res = await Promise.all([
+    fund_class,
+    fund_policy,
+    fund_loss,
+    fund_risk,
+    fund_dividend,
+  ])
 
   const res_1 = {
     project_id: projectInfo.projid,
@@ -98,6 +111,7 @@ async function getProjectClassInfo(projectInfo: IFund) {
     fund_policy: res[1],
     fund_loss: res[2],
     fund_risk: res[3],
+    fund_dividend: res[4],
   }
   // Seperate to sub class
 
@@ -106,6 +120,7 @@ async function getProjectClassInfo(projectInfo: IFund) {
     project_loss: res_1.fund_loss,
     project_risk: res_1.fund_risk,
     project_policy: res_1.fund_policy,
+    project_dividend: res_1.fund_dividend,
   }))
   // console.log(res_2)
 
@@ -170,20 +185,17 @@ async function getClassFund(projectInfo: IFund) {
   }
 }
 
-// async function getDividend(project_id: string) {
-//   try {
-//     const res = await httpRequest_SEC.get<IDividend>(
-//       `/FundFactsheet/fund/${project_id}/dividend`,
-//     )
-//     if (res.data) console.log(res.data)
-//     return {
-//       project_id,
-//       dividend: res.data.dividend_policy,
-//     }
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+async function getFundDividend(project_id: string) {
+  try {
+    const res = await httpRequest_SEC.get<IDividend>(
+      `/FundFactsheet/fund/${project_id}/dividend`,
+    )
+    // if (res.data) console.log(res.data)
+    return res.data.dividend_policy === 'Y' ? true : false
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 async function getFundRisk(project_id: string) {
   try {
@@ -198,17 +210,29 @@ async function getFundRisk(project_id: string) {
 
 async function main() {
   await addFund('C0000000239')
-  console.log('waiting for 5 Minute')
-  await new Promise(()=> setTimeout(()=> {console.log('Okay Next'), 1000*300}))
+  console.log('waiting for 100 sec')
+  await clockTime(300)
+  // await new Promise((resolve) => setTimeout(resolve, 1000 * 100))
   await addFund('C0000000329')
-  console.log('waiting for 5 Minute')
-  await new Promise(() =>
-    setTimeout(() => {
-      console.log('Okay Next'), 1000 * 5
-    }),
-  )
+  console.log('waiting for 100 Sec')
+  await clockTime(300)
+
+  // await new Promise((resolve) => setTimeout(resolve, 1000 * 100))
   await addFund('C0000000021')
-  prisma.$disconnect()
 }
 
+async function clockTime(n: number) {
+  let second = n
+  const _timer = setInterval(() => {
+    second--
+    console.log(`Time remaining: ${second} s`)
+  }, 1000)
+  const timer = await new Promise((resolve) =>
+    setTimeout(() => {
+      clearInterval(_timer)
+      return resolve(null)
+    }, 1000 * n),
+  )
+  return timer
+}
 main()

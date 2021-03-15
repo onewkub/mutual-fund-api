@@ -5,4 +5,6 @@ const router = Router()
 
 router.get('/fund', getFund)
 
+// router.get('/ontology_fund', getOntologyFund)
+
 export default router

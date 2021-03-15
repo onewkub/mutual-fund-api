@@ -31,6 +31,7 @@ export interface IFundInsert {
   project_loss: number
   project_risk: number
   project_policy: string
+  project_dividend: boolean
 }
 
 export interface IAssetInsert {
@@ -39,8 +40,10 @@ export interface IAssetInsert {
   asset_symbol: string
 }
 
+const patuation = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~\s]/g
+
 export async function addInvestRelation(project_id: string, asset_id: string) {
-  asset_id = asset_id.replace('&', '-').trim().replace('/t', '')
+  asset_id = asset_id.replace(patuation, '').trim()
   const command = `
   INSERT{
     ?fund mat:invest mat:${asset_id}
@@ -60,7 +63,7 @@ export async function addInvestRelation(project_id: string, asset_id: string) {
 export async function addAssetOntology(asset: IAssetInsert) {
   asset = {
     ...asset,
-    asset_id: asset.asset_id.replace('&', '-').trim().replace('/t', ''),
+    asset_id: asset.asset_id.replace(patuation, '').trim(),
   }
   const command = `
   INSERT DATA{
@@ -80,7 +83,7 @@ export async function addAssetOntology(asset: IAssetInsert) {
 export async function addFundOntology(fund: IFundInsert) {
   fund = {
     ...fund,
-    project_name: fund.project_name.replace('&', '-').trim().replace('/t', ''),
+    project_name: fund.project_name.replace(patuation, '').trim(),
   }
   let command = `
   INSERT DATA { mat:${fund.project_name} rdf:type mat:fund;
@@ -90,7 +93,10 @@ export async function addFundOntology(fund: IFundInsert) {
   mat:risk_rate "${fund.project_risk}"^^xsd:integer;
   ${
     fund.project_class_name !== '-'
-      ? `rdf:type mat:${getProjectClass(fund.project_class_name)};`
+      ? `rdf:type mat:${getProjectClass(
+          fund.project_class_name,
+          fund.project_dividend,
+        )};`
       : ''
   }
   ${
@@ -107,7 +113,10 @@ export async function addFundOntology(fund: IFundInsert) {
   }
 }
 
-function getProjectClass(className: string) {
+function getProjectClass(className: string, dividend: boolean) {
+  if (dividend) {
+    return 'dividen'
+  }
   switch (className) {
     case 'ชนิดสะสมมูลค่า':
       return 'accumurate'
@@ -125,6 +134,7 @@ const mock_data: IFundInsert = {
   project_name: 'SCBS&P500A',
   project_policy: 'equity_fund',
   project_risk: 6,
+  project_dividend: false,
 }
 
 function test() {
