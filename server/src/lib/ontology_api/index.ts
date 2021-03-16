@@ -13,25 +13,43 @@ export const httpRequest_ontology = new HttpRequest(
 export async function updateOntology(command: string) {
   const update: string = `${prefix} ${command}`
   // console.log(path)
-  await httpRequest_ontology.post('/', null, {
-    params: {
-      update,
-    },
-  })
+  try {
+    const res = await httpRequest_ontology.post('/', null, {
+      params: {
+        update,
+      },
+    })
+    return res.data
+  } catch (err) {
+    console.log(err)
+    return err
+  }
 }
 
 export async function queryOntology(command: String) {
-  await httpRequest_ontology.post(`?query=${prefix} ${command}`)
+  const query: string = `${prefix} ${command}`
+  try {
+    const res = await httpRequest_ontology.post(`/`, null, {
+      params: {
+        query,
+        output: 'json',
+      },
+    })
+    return res.data
+  } catch (err) {
+    console.log(err)
+    return err
+  }
 }
 
 export interface IFundInsert {
   project_id: string
   project_name: string
-  project_class_name: string
-  project_loss: number
-  project_risk: number
-  project_policy: string
-  project_dividend: boolean
+  // project_class_name: string
+  project_loss?: number
+  project_risk?: number
+  project_policy?: string
+  project_dividend?: boolean
 }
 
 export interface IAssetInsert {
@@ -85,20 +103,17 @@ export async function addFundOntology(fund: IFundInsert) {
     ...fund,
     project_name: fund.project_name.replace(patuation, '').trim(),
   }
-  let command = `
-  INSERT DATA { mat:${fund.project_name} rdf:type mat:fund;
-  rdf:type mat:${fund.project_policy};
-  mat:project_id "${fund.project_id}"^^xsd:string;
-  mat:project_name "${fund.project_name}"^^xsd:string;
-  mat:risk_rate "${fund.project_risk}"^^xsd:integer;
-  ${
-    fund.project_class_name !== '-'
-      ? `rdf:type mat:${getProjectClass(
-          fund.project_class_name,
-          fund.project_dividend,
-        )};`
-      : ''
+  if (!fund.project_policy) {
+    console.log(fund)
   }
+  let command = `
+  INSERT DATA { 
+    mat:${fund.project_name} rdf:type mat:fund;
+    rdf:type mat:${fund.project_policy};
+    mat:project_id "${fund.project_id}"^^xsd:string;
+    mat:project_name "${fund.project_name}"^^xsd:string;
+    mat:risk_rate "${fund.project_risk}"^^xsd:integer;
+  ${fund.project_dividend ? `rdf:type mat:dividend;` : ''}
   ${
     fund.project_loss
       ? `mat:project_loss "${fund.project_loss}"^^xsd:decimal .`
@@ -113,23 +128,24 @@ export async function addFundOntology(fund: IFundInsert) {
   }
 }
 
-function getProjectClass(className: string, dividend: boolean) {
-  if (dividend) {
-    return 'dividen'
-  }
-  switch (className) {
-    case 'ชนิดสะสมมูลค่า':
-      return 'accumurate'
-    case 'ชนิดจ่ายเงินปันผล':
-      return 'dividen'
-    default:
-      return 'accumurate'
-  }
-}
+// function getProjectClass(dividend: boolean) {
+//   if (dividend) {
+//     return 'dividend'
+//   }
+//   // switch (className) {
+//   //   case 'ชนิดสะสมมูลค่า':
+//   //     return 'accumurate'
+//   //   case 'ชนิดจ่ายเงินปันผล':
+//   //     return 'dividen'
+//   //   case ''
+//   //   default:
+//   //     return 'other'
+//   // }
+// }
 
 const mock_data: IFundInsert = {
   project_id: 'M0643_2555',
-  project_class_name: 'ชนิดสะสมมูลค่า',
+  // project_class_name: 'ชนิดสะสมมูลค่า',
   project_loss: -27.592499999999998,
   project_name: 'SCBS&P500A',
   project_policy: 'equity_fund',

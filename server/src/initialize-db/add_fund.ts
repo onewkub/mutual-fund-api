@@ -8,7 +8,7 @@ import {
   IProj,
   IRisk,
 } from '../interface/SEC'
-import { addFundOntology } from '../lib/ontology_api'
+import { addFundOntology, IFundInsert } from '../lib/ontology_api'
 import prisma from '../lib/prisma'
 import { httpRequest_SEC } from '../lib/sec_api'
 import { addTop5Asset } from './add_asset'
@@ -19,7 +19,7 @@ function mapToIFundModel(data: IProj[], amc_id: string): IFund[] {
     .filter(
       (element) =>
         element.fund_status === 'RG' &&
-        new Date(element.regis_date) > new Date('2014-12-31'),
+        new Date(element.regis_date) > new Date('2010-12-31'),
     )
     .map((element) => ({
       projid: element.proj_id,
@@ -68,7 +68,8 @@ async function addFundToOntology(fund_data: IFund[]) {
     fund_data.map((element) => getProjectClassInfo(element)),
   )
 
-  const data = [].concat(...res)
+  // const data = [].concat(...res)
+  const data = res
   console.log('insert Fund to Ontology...')
   await Promise.all(
     data.map((element) => {
@@ -76,10 +77,10 @@ async function addFundToOntology(fund_data: IFund[]) {
     }),
   )
 
-  // console.log('fetching asset from all fund...')
+  console.log('fetching asset from all fund...')
   await Promise.all(project_ids.map((element) => addTop5Asset(element)))
 
-  // console.log('add top 5 asset and invest to Ontology complete')
+  console.log('add top 5 asset and invest to Ontology complete')
   console.log('insert Fund to Ontology complete')
 }
 /**
@@ -92,39 +93,39 @@ async function addFundToOntology(fund_data: IFund[]) {
  */
 
 async function getProjectClassInfo(projectInfo: IFund) {
-  const fund_class = getClassFund(projectInfo)
+  // const fund_class = getClassFund(projectInfo)
   const fund_policy = getFundPolicy(projectInfo.projid)
   const fund_loss = getLoss(projectInfo.projid)
   const fund_risk = getFundRisk(projectInfo.projid)
   const fund_dividend = getFundDividend(projectInfo.projid)
   const res = await Promise.all([
-    fund_class,
+    // fund_class,
     fund_policy,
     fund_loss,
     fund_risk,
     fund_dividend,
   ])
 
-  const res_1 = {
+  const res_1: IFundInsert = {
     project_id: projectInfo.projid,
-    all_class: res[0],
-    fund_policy: res[1],
-    fund_loss: res[2],
-    fund_risk: res[3],
-    fund_dividend: res[4],
+    project_name: projectInfo.symbol,
+    // all_class: res[0],
+    project_policy: res[0],
+    project_loss: res[1],
+    project_risk: res[2],
+    project_dividend: res[3],
   }
   // Seperate to sub class
 
-  const res_2 = res_1.all_class?.map((element) => ({
-    ...element,
-    project_loss: res_1.fund_loss,
-    project_risk: res_1.fund_risk,
-    project_policy: res_1.fund_policy,
-    project_dividend: res_1.fund_dividend,
-  }))
+  // const res_2 = res_1.all_class?.map((element) => ({
+  //   ...element,
+  //   project_loss: res_1.fund_loss,
+  //   project_risk: res_1.fund_risk,
+  //   project_policy: res_1.fund_policy,
+  //   project_dividend: res_1.fund_dividend,
+  // }))
   // console.log(res_2)
-
-  return res_2
+  return res_1
 }
 
 async function getLoss(project_id: string) {
@@ -140,7 +141,7 @@ async function getLoss(project_id: string) {
       )
       avg = sum / res.data.length
     } else {
-      return res.data.loss_five_year_percent
+      return Number(res.data.loss_five_year_percent)
     }
     // console.log(avg)
     return avg
@@ -160,39 +161,42 @@ async function getFundPolicy(project_id: string) {
   }
 }
 
-async function getClassFund(projectInfo: IFund) {
-  try {
-    const res = await httpRequest_SEC.get<IClassFund[]>(
-      `/FundFactsheet/fund/${projectInfo.projid}/class_fund`,
-    )
-    if (res.data.length >= 2) {
-      return res.data.map((element) => ({
-        project_id: element.proj_id,
-        project_name: element.class_abbr_name,
-        project_class_name: element.class_name,
-      }))
-    } else {
-      return [
-        {
-          project_id: projectInfo.projid,
-          project_name: projectInfo.symbol,
-          project_class_name: '-',
-        },
-      ]
-    }
-  } catch (err) {
-    console.log(err)
-  }
-}
+// async function getClassFund(projectInfo: IFund) {
+//   try {
+//     const res = await httpRequest_SEC.get<IClassFund[]>(
+//       `/FundFactsheet/fund/${projectInfo.projid}/class_fund`,
+//     )
+//     if (res.data.length >= 2) {
+//       return res.data.map((element) => ({
+//         project_id: element.proj_id,
+//         project_name: element.class_abbr_name,
+//         project_class_name: element.class_name,
+//       }))
+//     } else {
+//       return [
+//         {
+//           project_id: projectInfo.projid,
+//           project_name: projectInfo.symbol,
+//           project_class_name: '-',
+//         },
+//       ]
+//     }
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 
 async function getFundDividend(project_id: string) {
   try {
     const res = await httpRequest_SEC.get<IDividend>(
       `/FundFactsheet/fund/${project_id}/dividend`,
     )
-    // if (res.data) console.log(res.data)
-    // if (res.data.dividend_policy === 'Y') console.log('YESSSSSSS DON"T ')
-    return res.data.dividend_policy === 'Y' ? true : false
+    if (Array.isArray(res.data)) {
+      const rlt = res.data.some((element) => element.dividend_policy === 'Y')
+      return rlt
+    }
+    return false
+    // return res.data.dividend_policy === 'Y' ? true : false
   } catch (err) {
     console.log(err)
   }
@@ -210,13 +214,18 @@ async function getFundRisk(project_id: string) {
 }
 
 async function main() {
-  await addFund('C0000000239')
-  console.log('waiting for 300 sec')
-  await clockTime(300)
-  await addFund('C0000000329')
-  console.log('waiting for 300 Sec')
-  await clockTime(300)
-  await addFund('C0000000021')
+  const cooldown = 60
+  await addFund('C0000000239') //SCB
+  console.log(`waiting for ${cooldown} sec`)
+  await clockTime(cooldown)
+  await addFund('C0000000329') //BBL
+  console.log(`waiting for ${cooldown} sec`)
+  await clockTime(cooldown)
+  await addFund('C0000000182') //TMB
+  console.log(`waiting for ${cooldown} sec`)
+  await clockTime(cooldown)
+  await addFund('C0000000021') //KASSET
+  
 }
 
 async function clockTime(n: number) {

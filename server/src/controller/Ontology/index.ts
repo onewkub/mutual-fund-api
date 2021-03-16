@@ -1,13 +1,11 @@
 import { Request, Response } from 'express'
+import { getFundOntology } from '../../service/Fund'
 
-export function getOntologyFund(req: Request, res: Response) {
+export async function getOntologyFund(req: Request, res: Response) {
   const loss: number = Number(req.query.loss)
-  const dividend: boolean = Boolean(req.query.dividen)
+  const dividend: boolean = req.query.dividend === 'true' ? true : false
 
-  // const command = `
-  // SELECT *
-  // WHERE{
-  //   ?fund mat:type mat:${di}
-  // }
-  // `
+  const rlt = await getFundOntology(loss, dividend)
+
+  res.json(rlt)
 }
