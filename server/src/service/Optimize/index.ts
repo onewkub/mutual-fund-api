@@ -12,22 +12,18 @@ function selectRisk(loss: number) {
       equity_fund: 40,
       fixed_income_fund: 60,
       other_fund: 0,
-      risk: Risk.low,
     },
     medium_risk: {
       equity_fund: 50,
       fixed_income_fund: 50,
       other_fund: 0,
-      risk: Risk.medium,
     },
     high_risk: {
       equity_fund: 50,
       fixed_income_fund: 40,
       other_fund: 10,
-      risk: Risk.high,
     },
   }
-
   if (loss < 10) return risk_category.low_risk
   else if (loss < 15) return risk_category.medium_risk
   else if (loss >= 15) return risk_category.high_risk

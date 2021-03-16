@@ -101,6 +101,26 @@
               rdfs:range xsd:string .
 
 
+###  http://www.semanticweb.org/mutual-fund#project_proift
+:project_proift rdf:type owl:DatatypeProperty ;
+                rdfs:domain :fund ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :project_proift ;
+                              owl:allValuesFrom xsd:decimal
+                            ] ;
+                rdfs:range xsd:decimal .
+
+
+###  http://www.semanticweb.org/mutual-fund#project_sd
+:project_sd rdf:type owl:DatatypeProperty ;
+            rdfs:domain :fund ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :project_sd ;
+                          owl:allValuesFrom xsd:decimal
+                        ] ;
+            rdfs:range xsd:decimal .
+
+
 ###  http://www.semanticweb.org/mutual-fund#risk_rate
 :risk_rate rdf:type owl:DatatypeProperty ;
            rdfs:domain :fund ,
@@ -114,11 +134,6 @@
 #################################################################
 #    Classes
 #################################################################
-
-###  http://www.semanticweb.org/mutual-fund#accumurate
-:accumurate rdf:type owl:Class ;
-            rdfs:subClassOf :fund .
-
 
 ###  http://www.semanticweb.org/mutual-fund#alternative_investment_fund
 :alternative_investment_fund rdf:type owl:Class ;
@@ -144,9 +159,9 @@
             rdfs:subClassOf :asset .
 
 
-###  http://www.semanticweb.org/mutual-fund#dividen
-:dividen rdf:type owl:Class ;
-         rdfs:subClassOf :fund .
+###  http://www.semanticweb.org/mutual-fund#dividend
+:dividend rdf:type owl:Class ;
+          rdfs:subClassOf :fund .
 
 
 ###  http://www.semanticweb.org/mutual-fund#equity_fund
@@ -180,7 +195,7 @@
 
 ###  http://www.semanticweb.org/mutual-fund#other
 :other rdf:type owl:Class ;
-       rdfs:subClassOf :asset .
+       rdfs:subClassOf :fund .
 
 
 ###  http://www.semanticweb.org/mutual-fund#stock
