@@ -1,5 +1,6 @@
 import express from 'express'
 import { Request, Response } from 'express'
+import cors from 'cors'
 import 'dotenv/config'
 
 import swaggerUI from 'swagger-ui-express'
@@ -11,6 +12,8 @@ const PORT = process.env.PORT || 8080
 const server = express()
 
 async function main() {
+  server.use(cors())
+
   server.use(express.json())
 
   server.get('/', (req: Request, res: Response) => {
