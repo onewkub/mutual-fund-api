@@ -26,20 +26,44 @@ export async function getFundSQL(project_id?: string) {
   }
 }
 
-export async function getFundOntology(loss: number, dividend: boolean) {
+export enum Risk {
+  low = 1,
+  medium = 2,
+  high = 3,
+}
+
+const riskValue = {
+  1: { start: 1, end: 4 },
+  2: { start: 5, end: 6 },
+  3: { start: 7, end: 8 },
+}
+
+export async function getFundOntology(
+  loss: number,
+  profit: number,
+  dividend: boolean,
+  litmit?: number,
+  risk?: Risk,
+) {
   const command = `
-  SELECT ?project_id ?project_name ?project_loss ?risk_rate
+  SELECT ?project_id ?name ?draw_down ?profit ?sd ?risk (?profit+?sd as ?max_profit) (?profit-?sd as ?min_profit)
   WHERE{
     ?fund mat:project_id ?project_id;
-          mat:project_name ?project_name;
-          mat:project_loss ?project_loss;
-          mat:risk_rate ?risk_rate;
+          mat:project_name ?name;
+          mat:project_loss ?draw_down;
+          mat:project_profit ?profit;
+          mat:project_sd ?sd;
+          mat:risk_rate ?risk;
           ${dividend ? 'rdf:type mat:dividend;' : ''}
-    filter ( ?project_loss >= -${loss * 1.25} && ?project_loss <= -${
-    loss * 0.75
-  } )
+          FILTER ( ?draw_down >= ${-loss} && (?sd + ?profit >= ${profit} || ?profit - ?sd >= 0) )
+          ${
+            risk
+              ? `FILTER (?risk >= ${riskValue[risk].start} && ?risk <= ${riskValue[risk].end})`
+              : ''
+          }
   }
-  ORDER BY DESC(?project_loss)
+  ORDER BY DESC(?profit+?sd) DESC(?profit-?sd) DESC(?draw_down)
+  ${litmit ? `LIMIT ${litmit}` : ''}
   `
   // console.log(command)
   try {

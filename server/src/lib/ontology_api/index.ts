@@ -50,6 +50,8 @@ export interface IFundInsert {
   project_risk?: number
   project_policy?: string
   project_dividend?: boolean
+  project_profit?: number
+  project_sd?: number
 }
 
 export interface IAssetInsert {
@@ -113,12 +115,22 @@ export async function addFundOntology(fund: IFundInsert) {
     mat:project_id "${fund.project_id}"^^xsd:string;
     mat:project_name "${fund.project_name}"^^xsd:string;
     mat:risk_rate "${fund.project_risk}"^^xsd:integer;
-  ${fund.project_dividend ? `rdf:type mat:dividend;` : ''}
-  ${
-    fund.project_loss
-      ? `mat:project_loss "${fund.project_loss}"^^xsd:decimal .`
-      : ''
-  } 
+    ${
+      fund.project_profit
+        ? `mat:project_profit "${fund.project_profit}"^^xsd:decimal;`
+        : ''
+    }
+    ${
+      fund.project_sd
+        ? `mat:project_sd "${fund.project_sd}"^^xsd:decimal;`
+        : ''
+    }
+    ${fund.project_dividend ? `rdf:type mat:dividend;` : ''}
+    ${
+      fund.project_loss
+        ? `mat:project_loss "${fund.project_loss}"^^xsd:decimal .`
+        : ''
+    } 
   }`
   try {
     console.log(`insert ${fund.project_name}`)

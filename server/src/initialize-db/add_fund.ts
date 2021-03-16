@@ -4,6 +4,7 @@ import {
   IDividend,
   // IDividend,
   ILost,
+  IPerformance,
   IPolicy,
   IProj,
   IRisk,
@@ -98,12 +99,14 @@ async function getProjectClassInfo(projectInfo: IFund) {
   const fund_loss = getLoss(projectInfo.projid)
   const fund_risk = getFundRisk(projectInfo.projid)
   const fund_dividend = getFundDividend(projectInfo.projid)
+  const fund_perfomance = getPerformance(projectInfo.projid)
   const res = await Promise.all([
     // fund_class,
     fund_policy,
     fund_loss,
     fund_risk,
     fund_dividend,
+    fund_perfomance,
   ])
 
   const res_1: IFundInsert = {
@@ -114,6 +117,8 @@ async function getProjectClassInfo(projectInfo: IFund) {
     project_loss: res[1],
     project_risk: res[2],
     project_dividend: res[3],
+    project_profit: res[4]?.avg_profit,
+    project_sd: res[4]?.avg_sd,
   }
   // Seperate to sub class
 
@@ -133,18 +138,17 @@ async function getLoss(project_id: string) {
     const res = await httpRequest_SEC.get<ILost[] | ILost>(
       `/FundFactsheet/fund/${project_id}/5YearLost`,
     )
-    let avg: number = 0
     if (Array.isArray(res.data)) {
       const sum = res.data.reduce(
         (prev, curr) => prev + Number(curr.loss_five_year_percent),
         0,
       )
-      avg = sum / res.data.length
+      const avg: number = Number((sum / res.data.length).toFixed(2))
     } else {
       return Number(res.data.loss_five_year_percent)
     }
     // console.log(avg)
-    return avg
+    return undefined
   } catch (err) {
     console.log(err)
   }
@@ -188,7 +192,7 @@ async function getFundPolicy(project_id: string) {
 
 async function getFundDividend(project_id: string) {
   try {
-    const res = await httpRequest_SEC.get<IDividend>(
+    const res = await httpRequest_SEC.get<IDividend[]>(
       `/FundFactsheet/fund/${project_id}/dividend`,
     )
     if (Array.isArray(res.data)) {
@@ -213,8 +217,52 @@ async function getFundRisk(project_id: string) {
   }
 }
 
+async function getPerformance(project_id: string) {
+  try {
+    const res = await httpRequest_SEC.get<IPerformance[]>(
+      `/FundFactsheet/fund/${project_id}/performance`,
+    )
+    if (Array.isArray(res.data) && res.data.length !== 0) {
+      const sd_data = res.data.filter(
+        (element) =>
+          element.performance_type_desc === 'ความผันผวนของกองทุนรวม' &&
+          element.reference_period === 'ตั้งแต่จัดตั้ง',
+      )
+      const profit_data = res.data.filter(
+        (element) =>
+          element.performance_type_desc === 'ผลตอบแทนกองทุนรวม' &&
+          element.reference_period === 'ตั้งแต่จัดตั้ง',
+      )
+      // console.log(profit_data)
+      const avg_sd: number = Number(
+        (
+          sd_data.reduce(
+            (prev, curr) => prev + Number(curr.performance_val),
+            0,
+          ) / profit_data.length
+        ).toFixed(2),
+      )
+
+      const avg_profit: number = Number(
+        (
+          profit_data.reduce(
+            (prev, curr) => prev + Number(curr.performance_val),
+            0,
+          ) / profit_data.length
+        ).toFixed(2),
+      )
+      // console.log(avg_profit)
+      return { avg_profit, avg_sd }
+    } else {
+      return undefined
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 async function main() {
-  const cooldown = 60
+  const cooldown = 300
   await addFund('C0000000239') //SCB
   console.log(`waiting for ${cooldown} sec`)
   await clockTime(cooldown)
@@ -225,7 +273,6 @@ async function main() {
   console.log(`waiting for ${cooldown} sec`)
   await clockTime(cooldown)
   await addFund('C0000000021') //KASSET
-  
 }
 
 async function clockTime(n: number) {
@@ -242,4 +289,11 @@ async function clockTime(n: number) {
   )
   return timer
 }
+
+async function test() {
+  const res = await getPerformance('M0429_2556')
+  console.log(res)
+}
+
+// test()
 main()

@@ -83,3 +83,12 @@ export interface IAsset {
   period: string
   secur_Invest_size: string
 }
+
+export interface IPerformance {
+  last_upd_date: string
+  class_abbr_name: string
+  performance_type_desc: string
+  reference_period: string
+  performance_val: string
+  as_of_date: string
+}
