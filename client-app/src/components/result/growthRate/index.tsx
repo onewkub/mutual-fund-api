@@ -16,7 +16,7 @@ function GrowthRate(props: IProps) {
   const { fundSet, fundPredict, input } = props
   const [dep, setDep] = useState<any[]>([])
   const [bal, setBal] = useState<any[]>([])
-  console.log(fundPredict)
+  // console.log(fundPredict)
 
   useEffect(() => {
     if (fundPredict) {
@@ -46,7 +46,7 @@ function GrowthRate(props: IProps) {
             // console.log(fundData)
           } else {
             const value =
-              ((input.perMonthBalance * Number(fundData?.percentage)) / 100) *
+              ((input.perMonthBalance * Number(fundData?.percentage)) / 100) /
                 fund.nav[key] +
               units[fund.project_id][key - 1]
             units[fund.project_id][key] = value
@@ -54,6 +54,7 @@ function GrowthRate(props: IProps) {
           }
           if (!sum[key]) {
             sum[key] = units[fund.project_id][key] * fund.nav[key]
+            // console.log(units[fund.project_id][key], fund.nav[key],sum[key])
           } else {
             sum[key] += units[fund.project_id][key] * fund.nav[key]
           }
@@ -77,9 +78,9 @@ function GrowthRate(props: IProps) {
       //   t: new Date(date),
       //   y:
       // }))
-      const bal = sum.map((element, index) => ({ t: dates[index], y: element }))
-      console.log(bal)
-      console.log(dep)
+      const bal = sum.map((element, index) => ({ t: dates[index], y: Number(element.toFixed(2)) }))
+      // console.log(bal)
+      // console.log(dep)
       setDep(dep)
       setBal(bal)
     }
@@ -98,7 +99,7 @@ function GrowthRate(props: IProps) {
         borderColor: '#f5c0c0',
         data: dep,
         label: 'เงินที่ออม',
-        // fill: false,
+        // fill: 1,
       },
 
       // {
@@ -123,7 +124,7 @@ function GrowthRate(props: IProps) {
           // display: true,
           // distribution: 'series',
           time: {
-            unit: 'month',
+            unit: 'year',
           },
         },
       ],
