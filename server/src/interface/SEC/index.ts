@@ -92,3 +92,20 @@ export interface IPerformance {
   performance_val: string
   as_of_date: string
 }
+
+export interface INAVFund {
+  last_upd_date: string
+  nav_date: string
+  net_asset: number
+  last_val: number
+  previous_val: number
+  amc_info: {
+    unique_id: string
+    sell_price: number
+    buy_price: number
+    sell_swap_price: number
+    buy_swap_price: number
+    remark_th: string
+    remark_en: string
+  }[]
+}

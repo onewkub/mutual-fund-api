@@ -14,6 +14,8 @@ export async function getFundSQL(project_id?: string) {
     } catch (err) {
       console.log(err)
       return err
+    } finally {
+      prisma.$disconnect()
     }
   } else {
     try {
@@ -22,6 +24,8 @@ export async function getFundSQL(project_id?: string) {
     } catch (err) {
       console.log(err)
       return err
+    } finally {
+      prisma.$disconnect()
     }
   }
 }

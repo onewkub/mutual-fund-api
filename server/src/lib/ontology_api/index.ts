@@ -121,9 +121,7 @@ export async function addFundOntology(fund: IFundInsert) {
         : ''
     }
     ${
-      fund.project_sd
-        ? `mat:project_sd "${fund.project_sd}"^^xsd:decimal;`
-        : ''
+      fund.project_sd ? `mat:project_sd "${fund.project_sd}"^^xsd:decimal;` : ''
     }
     ${fund.project_dividend ? `rdf:type mat:dividend;` : ''}
     ${
