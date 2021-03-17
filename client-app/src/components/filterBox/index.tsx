@@ -18,13 +18,14 @@ function FilterBox(props: IProps) {
   const [dividend, setDividend] = useState<boolean>(false)
   const { fetchFundSet } = props
 
-  const onFormLayoutChange = ({ dividend }: { dividend: boolean }) => {
-    setDividend(dividend)
+  const onFormLayoutChange = (value: any) => {
+    setDividend(value.dividend)
+    fetchFundSet(value.loss, value.loss * 1.25, value.dividend)
   }
 
   const onFinish = (value: any) => {
     console.log(value)
-    fetchFundSet(value.loss, 10, value.dividend)
+    fetchFundSet(value.loss, value.loss * 1.25, value.dividend)
   }
 
   return (
@@ -80,6 +81,7 @@ function FilterBox(props: IProps) {
           <Col xs={24} sm={8}>
             <Form.Item label="ระยะเวลาการลงทุน" name="period">
               <Slider
+                min={1}
                 max={50}
                 marks={{
                   5: '5 ปี',

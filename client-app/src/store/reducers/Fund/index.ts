@@ -2,14 +2,21 @@ import {
   FETCH_FUND_SET_BEGIN,
   FETCH_FUND_SET_FAILURE,
   FETCH_FUND_SET_SUCCESS,
+  IFund,
 } from 'store/actions/fundAction'
+
+interface IState {
+  items: IFund[] | null
+  loading: boolean
+  error: Error | null
+}
 
 interface IAction {
   type: string
   payload: any
 }
 
-const initial_state = {
+const initial_state: IState = {
   items: null,
   loading: false,
   error: null,

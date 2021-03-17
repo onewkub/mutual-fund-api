@@ -14,19 +14,20 @@ export interface IFund {
   max_profit: string
   min_profit: string
   percentage: number
+  fund_type: string
 }
 
-export interface IFundSet {
-  fix_income_fund: IFund
-  equity_fund: IFund
-  other_fund: IFund
-}
+// export interface IFundSet {
+//   fix_income_fund: IFund
+//   equity_fund: IFund
+//   other_fund: IFund
+// }
 
 export const fetchFundSetBegin = () => ({
   type: FETCH_FUND_SET_BEGIN,
 })
 
-export const fetchFundSetSuccess = (fundSet: IFundSet) => ({
+export const fetchFundSetSuccess = (fundSet: IFund[]) => ({
   type: FETCH_FUND_SET_SUCCESS,
   payload: fundSet,
 })
@@ -40,7 +41,7 @@ export function fetchFundSet(loss: number, profit: number, dividend: boolean) {
   return async (dispatch: any) => {
     dispatch(fetchFundSetBegin())
     try {
-      const res = await httpRequest.get<IFundSet>('/optimal_fund', {
+      const res = await httpRequest.get<IFund[]>('/optimal_fund', {
         params: {
           loss,
           profit,

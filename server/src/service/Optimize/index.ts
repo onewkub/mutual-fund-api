@@ -20,8 +20,8 @@ function selectRisk(loss: number) {
     },
     medium_risk: {
       equity_fund: 50,
-      fixed_income_fund: 50,
-      other_fund: 0,
+      fixed_income_fund: 45,
+      other_fund: 5,
     },
     high_risk: {
       equity_fund: 50,
@@ -53,11 +53,15 @@ export async function getOptimalFund(
 
   const res = await Promise.all([fix_income_fund, equity_fund, other_fund])
 
-  const rlt = {
-    fix_income_fund: { ...res[0][0], percentage: ratio.fixed_income_fund },
-    equity_fund: { ...res[1][0], percentage: ratio.equity_fund },
-    other_fund: { ...res[2][0], percentage: ratio.other_fund },
-  }
+  const rlt = [
+    {
+      ...res[0][0],
+      percentage: ratio.fixed_income_fund,
+      fund_type: 'fix_income_fund',
+    },
+    { ...res[1][0], percentage: ratio.equity_fund, fund_type: 'equity_fund' },
+    { ...res[2][0], percentage: ratio.other_fund, fund_type: 'other_fund' },
+  ]
   // console.log(rlt)
   return rlt
 }
@@ -71,4 +75,4 @@ async function test() {
   await getOptimalFund(mock_user.loss, mock_user.profit, mock_user.dividend)
 }
 
-test()
+// test()
