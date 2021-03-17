@@ -30,34 +30,24 @@ interface IProps {
 function Result(props: IProps) {
   const { fundSet, loading, error } = props
 
-  // useEffect(() => {
-  //   if (fundSet?.equity_fund.percentage > 0)
-  //     setFunds((prev) => [
-  //       ...prev,
-  //       { ...fundSet.equity_fund, fund_type: 'equity_fund' },
-  //     ])
-  //   if (fundSet?.fix_income_fund.percentage > 0)
-  //     setFunds((prev) => [
-  //       ...prev,
-  //       { ...fundSet.fix_income_fund, fund_type: 'fix_income_fund' },
-  //     ])
-  //   if (fundSet?.other_fund.percentage > 0)
-  //     setFunds((prev) => [
-  //       ...prev,
-  //       { ...fundSet.other_fund, fund_type: 'other_fund' },
-  //     ])
-  // }, [])
-
-  if (loading || !fundSet) {
+  if (error) {
+    return (
+      <div className="result" style={{ textAlign: 'center', padding: 10 }}>
+        <h2>Something went wrong</h2>
+      </div>
+    )
+  } else if (!fundSet) {
+    return (
+      <div className="result" style={{ textAlign: 'center', padding: 10 }}>
+        <h2>
+          กด <b>ค้นหา</b> เพื่อนประมวลผล
+        </h2>
+      </div>
+    )
+  } else if (loading) {
     return (
       <div className="result" style={{ textAlign: 'center', padding: 10 }}>
         <Spin size="large" />
-      </div>
-    )
-  } else if (error) {
-    return (
-      <div className="result">
-        <h2>Something went wrong</h2>
       </div>
     )
   }
