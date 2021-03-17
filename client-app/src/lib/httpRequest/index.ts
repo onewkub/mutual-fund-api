@@ -14,11 +14,11 @@ class HttpRequest {
       'application/x-www-form-urlencoded'
 
     this.axiosInstance.interceptors.request.use(
-      function (config) {
+      (config) => {
         // Do something before request is sent
         return config
       },
-      function (error) {
+      (error) => {
         // Do something with request error
         return Promise.reject(error)
       },
@@ -31,21 +31,6 @@ class HttpRequest {
         return response
       },
       (error) => {
-        // const {
-        //   config,
-        //   response: { status },
-        // } = error
-        // const originalRequest = config
-        // Do something with response error
-        // if (status === 421) {
-        //   return new Promise((resolve, reject) => {
-        //     console.log('waiting for 300 second')
-        //     setTimeout(
-        //       () => resolve(this.axiosInstance(originalRequest)),
-        //       1000 * 300,
-        //     )
-        //   })
-        // }
         return Promise.reject(error)
       },
     )
@@ -70,29 +55,6 @@ class HttpRequest {
   delete<type>(methodName: string, config?: AxiosRequestConfig) {
     return this.axiosInstance.delete<type>(methodName, config)
   }
-
-  // request(type, url, data) {
-  //   let promise = null
-  //   switch (type) {
-  //     case 'GET':
-  //       promise = axios.get(url, data)
-  //       break
-  //     case 'POST':
-  //       promise = axios.post(url, data)
-  //       break
-  //     case 'PUT':
-  //       promise = axios.put(url, data)
-  //       break
-  //     case 'DELETE':
-  //       promise = axios.delete(url, data)
-  //       break
-  //     default:
-  //       promise = axios.get(url, data)
-  //       break
-  //   }
-  //   return promise
-  // }
 }
-// const httpRequest = new HttpRequest()
 
 export default HttpRequest

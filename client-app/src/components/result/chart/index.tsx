@@ -1,19 +1,21 @@
 import { Doughnut, ChartData } from 'react-chartjs-2'
 import * as chartjs from 'chart.js'
+import { IFund } from 'store/actions/fundAction'
 
-function PartitionChart() {
+interface IProps {
+  fundSet: IFund[]
+}
+
+function PartitionChart(props: IProps) {
+  const { fundSet } = props
   const data: ChartData<chartjs.ChartData> = {
-    labels: ['ABC', 'BED', 'CEB', 'DAC', 'EAG'],
+    labels: fundSet
+      .filter((element) => element.percentage > 0)
+      .map((element) => element.name),
     datasets: [
       {
-        data: [1, 2, 3, 4, 5],
-        backgroundColor: [
-          '#99bbad',
-          '#ebd8b7',
-          '#c6a9a3',
-          '#9a8194',
-          '#9fd8df',
-        ],
+        data: fundSet.map((element) => element.percentage),
+        backgroundColor: ['#99bbad', '#ebd8b7', '#c6a9a3'],
       },
     ],
   }
