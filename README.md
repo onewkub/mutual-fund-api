@@ -21,10 +21,9 @@ Ocp-Apim-Subscription-Key: 02e827bbdcb540d48b07d08a22715302
 - [Apache Jena](https://jena.apache.org/)
 - [SPAQL](https://www.w3.org/TR/rdf-sparql-query/)
 - [Protégé](https://protege.stanford.edu/)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) __(Not confirm)__
+- [PostgreSQL](https://www.postgresql.org/download/) 
 - [Node.js](https://nodejs.org/en/) __(LTS Version) [Front-end]__
-- [.NET Core](https://dotnet.microsoft.com/download) __(Version 5.x) [Back-end]__
-
+- [FAST API](https://fastapi.tiangolo.com/)
 ## Front-end (Client App)
 - [React.js](https://reactjs.org/)
 - [Less.js](http://lesscss.org/) 
