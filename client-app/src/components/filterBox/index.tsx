@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { RootState } from 'store/reducers'
 import { connect } from 'react-redux'
 import { fetchFundSet } from 'store/actions/fundAction'
+import { IForm } from 'interface'
 
 const { Option } = Select
 
@@ -18,14 +19,16 @@ function FilterBox(props: IProps) {
   const [dividend, setDividend] = useState<boolean>(false)
   const { fetchFundSet } = props
 
-  const onFormLayoutChange = (value: any) => {
+  const onFormLayoutChange = async (value: IForm) => {
+    // console.log(value)
     setDividend(value.dividend)
-    fetchFundSet(value.loss, value.loss * 1.25, value.dividend)
+    // await new Promise((resolve) => setTimeout(resolve, 1500))
+    // form.submit()
   }
 
-  const onFinish = (value: any) => {
-    console.log(value)
-    fetchFundSet(value.loss, value.loss * 1.25, value.dividend)
+  const onFinish = (value: IForm) => {
+    // console.log(value)
+    fetchFundSet(value)
   }
 
   return (
@@ -39,7 +42,7 @@ function FilterBox(props: IProps) {
           perMonthBalance: 500,
           goal: 1000000,
           loss: 10,
-          period: 5,
+          year: 5,
         }}
         onValuesChange={onFormLayoutChange}
         onFinish={onFinish}
@@ -79,7 +82,7 @@ function FilterBox(props: IProps) {
             </Form.Item>
           </Col>
           <Col xs={24} sm={8}>
-            <Form.Item label="ระยะเวลาการลงทุน" name="period">
+            <Form.Item label="ระยะเวลาการลงทุน" name="year">
               <Slider
                 min={1}
                 max={50}

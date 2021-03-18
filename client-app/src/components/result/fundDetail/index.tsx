@@ -17,6 +17,11 @@ const columns = [
     key: 'name',
   },
   {
+    title: 'ชื่อกองทุน',
+    dataIndex: 'name_th',
+    key: 'name_th'
+  },
+  {
     title: 'เปอร์เซ็นการลงทุน',
     dataIndex: 'percentage',
     key: 'percentage  ',
@@ -31,6 +36,17 @@ const columns = [
     dataIndex: 'risk',
     key: 'risk',
   },
+  {
+    title: 'กำไรคาดหวังสูงสุด',
+    dataIndex: 'max_profit',
+    key: 'max_profit',
+  },
+  {
+    title: 'กำไรคาดหวังต่ำสุด',
+    dataIndex: 'min_profit',
+    key: 'min_profit',
+  },
+
 ]
 
 interface IProps {
@@ -58,7 +74,10 @@ function FundDetail(props: IProps) {
           .filter((element) => element.percentage > 0)
           .map((element) => ({
             ...element,
+            key: element.project_id,
             fund_type: change_fund_type_to_th(element.fund_type),
+            max_profit: Number(element.max_profit).toFixed(2),
+            min_profit: Number(element.min_profit).toFixed(2),
           }))}
         columns={columns}
       />
