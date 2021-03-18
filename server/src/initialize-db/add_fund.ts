@@ -144,6 +144,7 @@ async function getLoss(project_id: string) {
         0,
       )
       const avg: number = Number((sum / res.data.length).toFixed(2))
+      return avg
     } else {
       return Number(res.data.loss_five_year_percent)
     }
