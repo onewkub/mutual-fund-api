@@ -1,6 +1,6 @@
 version: "3.8"
 
-services: 
+services:
   client-app:
     container_name: client-app
     image: ${DOCKER_REGISTRY-}mutual-fund-client-app
@@ -8,28 +8,37 @@ services:
       - 3000:3000
     build:
       context: ./client-app
-      dockerfile: : Dockerfile
+      dockerfile: Dockerfile
   mutual-fund-api:
-      container_name: mutual-fund-api
-      image: ${DOCKER_REGISTER-}mutual-fund-api
-      ports:
-        - 8080:8080
-      buid:
-        context: ./server
-        dockerfile: Dockerfile
+    container_name: mutual-fund-api
+    image: ${DOCKER_REGISTER-}mutual-fund-api
+    ports:
+      - 8080:8080
+    build:
+      context: ./server
+      dockerfile: Dockerfile
   mutual-fund-prediction-api:
-      container_name: mutual-fund-prediction-api
-      image: ${DOCKER_REGISTER-}mutual-fund-prediction-api
-      ports: 
-        - 8000:8000
-      build: : 
-        context: ./ai-api
-        dockerfile: Dockerfile
-      
-  sql-server:
-      container_name: sql-server
-      image: postgres:13.2-alpine
-      environment: 
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: mutual-fund
+    container_name: mutual-fund-prediction-api
+    image: ${DOCKER_REGISTER-}mutual-fund-prediction-api
+    ports:
+      - 8000:8000
+    build:
+      context: ./ai-api
+      dockerfile: Dockerfile
 
+  sql-server:
+    container_name: sql-server
+    image: postgres:13.2-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mutual-fund
+  ontology-server:
+    container_name: ontology-server
+    image: secoresearch/fuseki
+    ports:
+      - 3030:3030
+    environment:
+      ADMIN_PASSWORD: admin
+      ENABLE_DATA_WRITE: 'true'
+      ENABLE_UPDATE: 'true'
+      ENABLE_UPLOAD: 'true'
