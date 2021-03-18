@@ -1,11 +1,15 @@
 import { ChartData, Line } from 'react-chartjs-2'
 import * as chartjs from 'chart.js'
+import { Col, Typography } from 'antd'
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 import './style.less'
 import { IPredictFund } from 'store/actions/fundPredicAction'
 import { useEffect, useState } from 'react'
 import { IForm } from 'interface'
 import { IFund } from 'store/actions/fundAction'
+import './style.less'
 
+const { Paragraph, Title } = Typography
 interface IProps {
   fundSet: IFund[]
   fundPredict: IPredictFund[]
@@ -16,8 +20,8 @@ function GrowthRate(props: IProps) {
   const { fundSet, fundPredict, input } = props
   const [dep, setDep] = useState<any[]>([])
   const [bal, setBal] = useState<any[]>([])
+  const [goal, setGoal] = useState<boolean>(false)
   // console.log(fundPredict)
-
   useEffect(() => {
     if (fundPredict) {
       const dates = fundPredict[0].date
@@ -46,7 +50,8 @@ function GrowthRate(props: IProps) {
             // console.log(fundData)
           } else {
             const value =
-              ((input.perMonthBalance * Number(fundData?.percentage)) / 100) /
+              (input.perMonthBalance * Number(fundData?.percentage)) /
+                100 /
                 fund.nav[key] +
               units[fund.project_id][key - 1]
             units[fund.project_id][key] = value
@@ -78,13 +83,22 @@ function GrowthRate(props: IProps) {
       //   t: new Date(date),
       //   y:
       // }))
-      const bal = sum.map((element, index) => ({ t: dates[index], y: Number(element.toFixed(2)) }))
+      const bal = sum.map((element, index) => ({
+        t: dates[index],
+        y: Number(element.toFixed(2)),
+      }))
       // console.log(bal)
       // console.log(dep)
+      const index = bal.length - 1
+      const val = bal[index].y
+      if (input.goal > val) setGoal(false)
+      else setGoal(true)
+
       setDep(dep)
       setBal(bal)
     }
-  }, [fundPredict])
+    // eslint-disable-next-line
+  }, [])
   const data: ChartData<chartjs.ChartData> = {
     datasets: [
       {
@@ -145,9 +159,40 @@ function GrowthRate(props: IProps) {
   }
 
   return (
-    <div className="growth-chart">
-      <Line data={data} options={options} />
-    </div>
+    <>
+      <Col xs={24} sm={18}>
+        <div className="partition-box">
+          <div className="growth-chart">
+            <Paragraph>แสดงอัตราการเติบโต</Paragraph>
+
+            <Line data={data} options={options} />
+          </div>
+        </div>
+      </Col>
+      <Col xs={24} sm={6}>
+        <div className="partition-box">
+          <Paragraph>เป้าหมาย</Paragraph>
+          {goal ? (
+            <div className="goal-box">
+              <Title>
+                <CheckOutlined />
+              </Title>
+              <Title>ตามเป้าหมาย</Title>
+            </div>
+          ) : (
+            <div className="goal-box">
+              <Title>
+                <CloseOutlined />
+              </Title>
+
+              <Title level={3}>
+                จำนวนรายได้ทั้งหมดไม่ถึงเป้ากรุณาเพิ่มจำนวนเงินต่อเดือนหรือเงินต้นรวมถึงระยะเวลา
+              </Title>
+            </div>
+          )}
+        </div>
+      </Col>
+    </>
   )
 }
 

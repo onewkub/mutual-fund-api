@@ -17,6 +17,11 @@ const columns = [
     key: 'name',
   },
   {
+    title: 'ชื่อกองทุน',
+    dataIndex: 'name_th',
+    key: 'name_th'
+  },
+  {
     title: 'เปอร์เซ็นการลงทุน',
     dataIndex: 'percentage',
     key: 'percentage  ',
@@ -41,6 +46,7 @@ const columns = [
     dataIndex: 'min_profit',
     key: 'min_profit',
   },
+
 ]
 
 interface IProps {

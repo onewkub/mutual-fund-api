@@ -70,16 +70,16 @@ function Result(props: IProps) {
             <FundDetail fundSet={fundSet} />
           </div>
         </Col>
-        <Col xs={24} sm={24}>
-          <div className="partition-box">
-            <Paragraph>แสดงอัตราการเติบโต</Paragraph>
+        {/* <Col xs={24} sm={24}> */}
+          {/* <div className="partition-box"> */}
+            {/* <Paragraph>แสดงอัตราการเติบโต</Paragraph> */}
             <GrowthRate
               fundSet={fundSet}
               fundPredict={fundPredict}
               input={input}
             />
-          </div>
-        </Col>
+          {/* </div> */}
+        {/* </Col> */}
       </Row>
     </div>
   )
