@@ -101,11 +101,12 @@
               rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/mutual-fund#project_proift
-:project_proift rdf:type owl:DatatypeProperty ;
+###  http://www.semanticweb.org/mutual-fund#project_profit
+:project_profit rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
                 rdfs:domain :fund ,
                             [ rdf:type owl:Restriction ;
-                              owl:onProperty :project_proift ;
+                              owl:onProperty :project_profit ;
                               owl:allValuesFrom xsd:decimal
                             ] ;
                 rdfs:range xsd:decimal .
@@ -129,6 +130,13 @@
                          owl:allValuesFrom xsd:integer
                        ] ;
            rdfs:range xsd:integer .
+
+
+###  http://www.w3.org/2002/07/owl#topDataProperty
+owl:topDataProperty rdfs:domain [ rdf:type owl:Restriction ;
+                                  owl:onProperty :project_profit ;
+                                  owl:someValuesFrom owl:rational
+                                ] .
 
 
 #################################################################
