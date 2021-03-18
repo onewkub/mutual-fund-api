@@ -162,9 +162,8 @@ function GrowthRate(props: IProps) {
     <>
       <Col xs={24} sm={18}>
         <div className="partition-box">
+          <Paragraph>แสดงอัตราการเติบโต</Paragraph>
           <div className="growth-chart">
-            <Paragraph>แสดงอัตราการเติบโต</Paragraph>
-
             <Line data={data} options={options} />
           </div>
         </div>
