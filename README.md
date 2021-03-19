@@ -11,7 +11,7 @@ Matual Fund data on Thailand. [SEC API](https://api-portal.sec.or.th/)
 Ocp-Apim-Subscription-Key: Regist from SEC API
 ```
 
-## Rund Project
+## Demo Project
 ```
 docker-compose up -d
 ```
