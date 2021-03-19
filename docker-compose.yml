@@ -48,8 +48,8 @@ services:
   sql-server:
     container_name: sql-server
     image: postgres:13.2-alpine
-    volumes:
-      - ./sql_db:/var/lib/postgresql/data
+    # volumes:
+    #   - ./sql_db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: mutual-fund
