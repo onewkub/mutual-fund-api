@@ -21,19 +21,19 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
+    # volumes:
+    #   - ./wait-for:/usr/local/bin/wait-for
+    #   - ./wait-for-it/wait-for-it.sh:/usr/local/bin/wait-for-it.sh
     environment:
       DATABASE_URL: "postgresql://postgres:postgres@sql-server:5432/mutual-fund?schema=public"
       ONTOLOGY_API: "http://ontology-server:3030/mutual-fund"
       PREDICT_API: "http://mutual-fund-prediction-api:8000"
       INSERT_ONTOLOGY: "false"
     command:
-      [
-        # "./wait-for-it/wait-for-it.sh",
-        # "sql-server:5432",
-        # "--",
-        "yarn",
-        "migrate-seed-start",
-      ]
+      - sh
+      - -c
+      - ./wait-for-it.sh sql-server:5432 -- yarn migrate-seed-start
+    # command: ["sh", "-c", "/server/wait-for-it/wait-for-it.sh www.google.com:80 -- yarn migrate-seed-start"]
     depends_on:
       - sql-server
       - ontology-server
