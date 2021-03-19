@@ -6,11 +6,15 @@ The Project will develop with [Apache Jena](https://jena.apache.org/) and [SPAQL
 
 ## Matual Fund Data
 Matual Fund data on Thailand. [SEC API](https://api-portal.sec.or.th/)
-### Header for request API  __(SECRET)__
+### Header for request API 
 ```
-Ocp-Apim-Subscription-Key: 02e827bbdcb540d48b07d08a22715302
+Ocp-Apim-Subscription-Key: Regist from SEC API
 ```
 
+## Rund Project
+```
+docker-compose up -d
+```
 
 
 ## Objective
