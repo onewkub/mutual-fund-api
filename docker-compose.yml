@@ -28,9 +28,9 @@ services:
       INSERT_ONTOLOGY: "false"
     command:
       [
-        "./wait-for-it/wait-for-it.sh",
-        "sql-server:5432",
-        "--",
+        # "./wait-for-it/wait-for-it.sh",
+        # "sql-server:5432",
+        # "--",
         "yarn",
         "migrate-seed-start",
       ]
