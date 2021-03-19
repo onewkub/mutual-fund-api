@@ -7,7 +7,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>`
 
 export const httpRequest_ontology = new HttpRequest(
-  'http://localhost:3030/mutual-fund',
+  process.env.ONTOLOGY_API || 'http://localhost:3030/mutual-fund',
 )
 
 export async function updateOntology(command: string) {
