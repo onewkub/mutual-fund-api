@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  client-app:
+    container_name: client-app
+    image: ${DOCKER_REGISTRY-}mutual-fund-client-app
+    ports:
+      - 3000:3000
+    build:
+      context: ./client-app
+      dockerfile: Dockerfile
+    environment:
+      SERVER_API_URL: mutual-fund-api:8080
+    depends_on:
+      - mutual-fund-api
+  mutual-fund-api:
+    container_name: mutual-fund-api
+    image: ${DOCKER_REGISTER-}mutual-fund-api
+    ports:
+      - 8080:8080
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@sql-server:5432/mutual-fund?schema=public"
+      ONTOLOGY_API: "http://ontology-server:3030/mutual-fund"
+      PREDICT_API: "http://mutual-fund-prediction-api:8000"
+      INSERT_ONTOLOGY: "false"
+    command:
+      [
+        "./wait-for-it/wait-for-it.sh",
+        "sql-server:5432",
+        "--",
+        "yarn",
+        "migrate-seed-start",
+      ]
+    depends_on:
+      - sql-server
+      - ontology-server
+  mutual-fund-prediction-api:
+    container_name: mutual-fund-prediction-api
+    image: ${DOCKER_REGISTER-}mutual-fund-prediction-api
+    ports:
+      - 8000:8000
+    build:
+      context: ./ai-api
+      dockerfile: Dockerfile
+  sql-server:
+    container_name: sql-server
+    image: postgres:13.2-alpine
+    # volumes:
+    #   - ./sql_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mutual-fund
+  ontology-server:
+    container_name: ontology-server
+    image: stain/jena-fuseki
+    ports:
+      - 3030:3030
+    environment:
+      ADMIN_PASSWORD: admin
+      # FUSEKI_DATASET_1: mutual-fund
+    volumes:
+      - ./Ontology/fuseki:/fuseki
