@@ -15,6 +15,8 @@ import { httpRequest_SEC } from '../lib/sec_api'
 import { addTop5Asset } from './add_asset'
 import { getRiskAtInteger, mapFundPolicy } from './helper'
 
+import 'dotenv/config'
+
 function mapToIFundModel(data: IProj[], amc_id: string): IFund[] {
   const res: IFund[] = data
     .filter(
@@ -48,9 +50,13 @@ async function addFund(amc_id: string) {
 
     await prisma.fund.createMany({ data, skipDuplicates: true })
 
-    console.log('Insert Fund data to Knowledgebase....')
+    console.log('Insert fund to sql database complete')
+    // console.log(process.env.INSERT_ONTOLOGY)
+    if (process.env.INSERT_ONTOLOGY === 'true' ? true : false) {
+      console.log('Insert Fund data to Knowledgebase....')
 
-    await addFundToOntology(data)
+      await addFundToOntology(data)
+    }
 
     await prisma.$disconnect()
     console.log(`END for ${amc_id}`)
@@ -144,6 +150,7 @@ async function getLoss(project_id: string) {
         0,
       )
       const avg: number = Number((sum / res.data.length).toFixed(2))
+      return avg
     } else {
       return Number(res.data.loss_five_year_percent)
     }
@@ -262,7 +269,7 @@ async function getPerformance(project_id: string) {
 }
 
 async function main() {
-  const cooldown = 300
+  const cooldown = process.env.INSERT_ONTOLOGY === 'true' ? 3000 : 1
   await addFund('C0000000239') //SCB
   console.log(`waiting for ${cooldown} sec`)
   await clockTime(cooldown)

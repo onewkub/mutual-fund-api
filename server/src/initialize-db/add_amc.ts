@@ -22,7 +22,7 @@ async function AddAMC() {
 
     console.log('Insert AMC data to Local Database....')
 
-    await prisma.aMC.createMany({ data })
+    await prisma.aMC.createMany({ data, skipDuplicates: true })
 
     console.log('Insert AMC data success')
   } catch (err) {

@@ -25,6 +25,10 @@
     "typescript": "^4.2.2"
   },
   "scripts": {
+    "migrate-seed-start": "yarn migrate && yarn add_amc && yarn add_fund && yarn start", 
+    "add_fund": "ts-node ./src/initialize-db/add_fund.ts",
+    "add_amc": "ts-node ./src/initialize-db/add_amc.ts",
+    "migrate" :"prisma migrate dev --name migrate-db --preview-feature ",
     "start": "ts-node ./src/index.ts",
     "dev": "nodemon ts"
   },

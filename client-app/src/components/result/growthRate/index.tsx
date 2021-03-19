@@ -26,10 +26,15 @@ function GrowthRate(props: IProps) {
     if (fundPredict) {
       const dates = fundPredict[0].date
       // setDate(dates.map((element) => new Date(element)))
-      const dep = dates.map((date, acc) => ({
-        t: new Date(date),
-        y: input.initBalance + acc * input.perMonthBalance,
-      }))
+      // console.log(input.goal)
+      // console.log(input.perMonthBalance, input.initBalance)
+      const dep = dates.map((date, acc) => {
+        // console.log(input.initBalance + acc * input.perMonthBalance)
+        return {
+          t: new Date(date),
+          y: Number(input.initBalance) + acc * input.perMonthBalance,
+        }
+      })
       let units: any = {}
       fundSet.forEach((element) => (units[element.project_id] = []))
       // console.log(units)

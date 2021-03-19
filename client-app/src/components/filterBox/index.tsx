@@ -52,17 +52,17 @@ function FilterBox(props: IProps) {
             <Row gutter={[6, 0]}>
               <Col span={12}>
                 <Form.Item label="เงินทุนเริ่มต้น" name="initBalance">
-                  <Input placeholder="5,000" suffix="บาท" />
+                  <Input type="number" placeholder="5,000" suffix="บาท" />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item label="เงินทุนต่อเดือน" name="perMonthBalance">
-                  <Input placeholder="5,000" suffix="บาท" />
+                  <Input type="number" placeholder="5,000" suffix="บาท" />
                 </Form.Item>
               </Col>
             </Row>
             <Form.Item label="จำนวนเงินเป้าหมาย" name="goal">
-              <Input placeholder="1,000,000" suffix="บาท" />
+              <Input type="number" placeholder="1,000,000" suffix="บาท" />
             </Form.Item>
           </Col>
           <Col xs={24} sm={8}>

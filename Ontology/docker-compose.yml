@@ -1,0 +1,13 @@
+version: "3.8"
+services: 
+  ontology-server:
+    image: stain/jena-fuseki
+    ports:
+      - 3030:3030
+    environment: 
+      ADMIN_PASSWORD: admin
+      FUSEKI_DATASET_1: mutual-fund
+    volumes: 
+      - ./fuseki:/fuseki
+      # - ./mutual-fund:/staging
+    # command: ["./load.sh", "mutual-fund", "ontology-backup.ttl"]
